@@ -23,9 +23,63 @@ basicamente de uso próprio ou rotineiro.
 
 Não raramente, um pacote de uso pessoal acaba se tornando útil para
 outras pessoas e o autor disponibiliza para uso geral. O importante é
-então saber como transformar suas funções em um pacote. Isso pode ser
-feito de duas formas:
+então saber como transformar suas funções em um pacote. Basicamente um
+pacote do R é composto *obrigatoriamente* por apenas dois diretórios e
+dois arquivos de meta dados:
+
+* `R/`: um diretório contendo as funções em arquivos `*.R`
+* `man/`: um diretório contendo a documentação (páginas de ajuda) de
+  cada função do diretório acima. Os arquivos de documentação do R
+  terminam com a extensão `.Rd`.
+* `DESCRIPTION`: um arquivo texto contendo as informações sobre o seu
+  pacote: autor, licença, outros pacotes dependentes, ...
+* `NAMESPACE`: um arquivo texto que informa quais funções do seu pacote
+  serão exportadas, ou seja, aquelas que estarão disponíveis para o
+  usuário, e quais funções são importadas de outros pacotes dos quais o
+  seu depende.
+
+Abaixo serão especificados os detalhes para a criação de cada um destes
+componentes. Após ter essa estrutura pronta, a criação do pacote pode
+ser feita de duas formas:
 
 * Tradicional: usando os comandos padrões do R para criação de pacotes,
-como `R CMD build` e `R CMD check`.
-* Moderna: usando o pacote `devtools` para criar e conferir o pacote
+  como `R CMD build` para criar e `R CMD check` para conferir o pacote,
+  ambos executados através de um terminal e não de uma sessão do R.
+* Moderna: usando o pacote `devtools`, que possui funções para criar e
+  conferir o pacote (inclusive para testar e documentar as funções) de
+  dentro de uma sessão do R.
+
+A maneira tradicional de criar pacotes no R é um pouco mais trabalhosa,
+pois cada vez que você quiser checar se seu pacote está funcionando, é
+necessário ir para um terminal e rodar os comandos por fora do R. Além
+disso, se você quiser testar seu pacote após a instalação, será
+necessário instalar de fato o pacote e carregá-lo com `library()`. O
+grande problema é que durante o desenvolvimento de um pacote, esses
+passos geralmente são repetidos muitas vezes, o que torna todo o
+processo muito demorado.
+
+O pacote `devtools` facilita todo esse processo, pois você pode
+construir, checar, documentar (e conferir a documentação) de dentro da
+própria sessão do R que você está desenvolvendo o pacote. Além disso
+esse pacote também permite que, com uma função, você simule a instalação
+do seu pacote na mesma sessão R, evitando ter que instalar e desinstalar
+para testes todas as vezes.
+
+Um outro aspecto fundamental de todo pacote é a sua documentação. Da
+maneira tradicional, é necessário criar os arquivos `.Rd` e escrever
+usando uma linguagem muito parecida com o LaTeX. Toda vez que você
+quiser editar a documentação é necessário abrir esses arquivos e
+modificá-los nesse formato. Para facilitar ainda mais a vida dos
+programadores, existe o pacote `roxygen2`, que possibilita escrever a
+documentação dentro da própria função `.R`, integrando código e
+documentação em um único arquivo, e facilitando a edição das páginas de
+ajuda. 
+
+O pacote `roxygen2` pode ser utilizado também na abordagem tradicional
+de criação de pacotes, eliminando uma etapa trabalhosa que é a de criar
+os arquivos de documentação. No entanto, podemos usar todo o potencial
+do `devtools` e do `roxygen2` juntos, e nos preocuparmos apenas com o
+design das funções e não com todo o processo de criação do pacote em
+si.
+
+
