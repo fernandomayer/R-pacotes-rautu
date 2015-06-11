@@ -23,24 +23,12 @@ basicamente de uso próprio ou rotineiro.
 
 Não raramente, um pacote de uso pessoal acaba se tornando útil para
 outras pessoas e o autor disponibiliza para uso geral. O importante é
-então saber como transformar suas funções em um pacote. Basicamente um
-pacote do R é composto *obrigatoriamente* por apenas dois diretórios e
-dois arquivos de meta dados:
+então saber como transformar suas funções em um pacote. E mais
+importante ainda é saber como fazer isso se preocupando apenas com as
+funções, ao invés de se preocupar com todo o processo de criação do
+pacote.
 
-* `R/`: um diretório contendo as funções em arquivos `*.R`
-* `man/`: um diretório contendo a documentação (páginas de ajuda) de
-  cada função do diretório acima. Os arquivos de documentação do R
-  terminam com a extensão `.Rd`.
-* `DESCRIPTION`: um arquivo texto contendo as informações sobre o seu
-  pacote: autor, licença, outros pacotes dependentes, ...
-* `NAMESPACE`: um arquivo texto que informa quais funções do seu pacote
-  serão exportadas, ou seja, aquelas que estarão disponíveis para o
-  usuário, e quais funções são importadas de outros pacotes dos quais o
-  seu depende.
-
-Abaixo serão especificados os detalhes para a criação de cada um destes
-componentes. Após ter essa estrutura pronta, a criação do pacote pode
-ser feita de duas formas:
+A criação de um pacote no R pode ser feita de duas formas:
 
 * Tradicional: usando os comandos padrões do R para criação de pacotes,
   como `R CMD build` para criar e `R CMD check` para conferir o pacote,
@@ -82,4 +70,42 @@ do `devtools` e do `roxygen2` juntos, e nos preocuparmos apenas com o
 design das funções e não com todo o processo de criação do pacote em
 si.
 
+## Estrutura de um pacote
 
+Basicamente um pacote do R é uma convenção para organizar e padronizar a
+distribuição de funções extras do R. Todo pacote é composto
+*obrigatoriamente* por apenas dois diretórios e dois arquivos de meta
+dados:
+
+* `R/`: um diretório contendo as funções em arquivos `*.R`
+* `man/`: um diretório contendo a documentação (páginas de ajuda) de
+  cada função do diretório acima. Os arquivos de documentação do R
+  terminam com a extensão `.Rd`.
+* `DESCRIPTION`: um arquivo texto contendo as informações sobre o seu
+  pacote: autor, licença, outros pacotes dependentes, ...
+* `NAMESPACE`: um arquivo texto que informa quais funções do seu pacote
+  serão exportadas, ou seja, aquelas que estarão disponíveis para o
+  usuário, e quais funções são importadas de outros pacotes dos quais o
+  seu depende.
+
+Outros componentes que não são obrigatórios, mas podem estar presentes
+no pacote são (nenhum deles serão abordados aqui):
+
+* `tests/`: um diretório contendo scripts com testes unitários, rodados
+  durante a criação do pacote, para testar se existe algum resultado não
+  esperado sendo retornado por alguma de suas funções.
+* `vignettes/`: um diretório que contém uma ou mais *vignettes*, que
+  traduzidas literalmente são como "vinhetas", pequenos (ou mesmo
+  grandes) textos que explicam com mais detalhes como os usuários podem
+  usar as funções de seu pacote.
+* `data/`: um diretório contendo arquivos de dados (normalmente em
+  formato binário e comprimido do R, `.rda`), que podem ser usados como
+  exemplos para aplicação das funções do pacote.
+
+Abaixo serão especificados os detalhes para a criação de cada um dos
+componentes obrigatórios. descritos acima.
+
+## Funções: `R/`
+
+Se você já possui um diretório `R/` contendo apenas funções do R
+(arquivos `.R`), então a maior parte do problema já está resolvido.
