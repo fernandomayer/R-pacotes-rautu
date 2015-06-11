@@ -77,10 +77,11 @@ distribuição de funções extras do R. Todo pacote é composto
 *obrigatoriamente* por apenas dois diretórios e dois arquivos de meta
 dados:
 
-* `R/`: um diretório contendo as funções em arquivos `*.R`
+* `R/`: um diretório contendo as funções em arquivos `*.R` (ex.:
+  `foo.R`).
 * `man/`: um diretório contendo a documentação (páginas de ajuda) de
   cada função do diretório acima. Os arquivos de documentação do R
-  terminam com a extensão `.Rd`.
+  terminam com a extensão `.Rd` (ex.: `foo.Rd`).
 * `DESCRIPTION`: um arquivo texto contendo as informações sobre o seu
   pacote: autor, licença, outros pacotes dependentes, ...
 * `NAMESPACE`: um arquivo texto que informa quais funções do seu pacote
@@ -105,7 +106,42 @@ no pacote são (nenhum deles serão abordados aqui):
 Abaixo serão especificados os detalhes para a criação de cada um dos
 componentes obrigatórios. descritos acima.
 
-## Funções: `R/`
+## `R/`: Funções
 
 Se você já possui um diretório `R/` contendo apenas funções do R
-(arquivos `.R`), então a maior parte do problema já está resolvido.
+(arquivos `.R`), então a maior parte do problema já está
+resolvido. Basta seguir o restante do texto para ver como criar os
+outros componentes do pacote.
+
+Caso você queira começar um pacote do início, as opções são: 1) criar
+todos os componentes (diretórios e arquivos) manualmente e ir
+alimentando com conteúdo, ou 2) usar a função `create()` do pacote
+`devtools` para criar um "esqueleto" inicial com os arquivos e
+diretórios fundamentais de um pacote. Portanto:
+
+
+```r
+library(devtools)
+create("meupacote", rstudio = FALSE)
+```
+
+```
+## Creating package meupacote in .
+## No DESCRIPTION found. Creating with values:
+```
+
+```
+## Package: meupacote
+## Title: What the Package Does (one line, title case)
+## Version: 0.0.0.9000
+## Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+## Description: What the package does (one paragraph)
+## Depends: R (>= 3.2.0)
+## License: What license is it under?
+## LazyData: true
+```
+
+irá criar
+
+
+[John M. Chambers]: http://statweb.stanford.edu/~jmc4/
