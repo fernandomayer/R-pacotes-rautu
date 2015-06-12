@@ -126,19 +126,7 @@ create("meupacote", rstudio = FALSE)
 ```
 
 ```
-## Creating package meupacote in .
-## No DESCRIPTION found. Creating with values:
-```
-
-```
-## Package: meupacote
-## Title: What the Package Does (one line, title case)
-## Version: 0.0.0.9000
-## Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-## Description: What the package does (one paragraph)
-## Depends: R (>= 3.2.0)
-## License: What license is it under?
-## LazyData: true
+Error: Directory already exists
 ```
 
 irá criar

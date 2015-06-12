@@ -119,7 +119,7 @@ alimentando com conteúdo, ou 2) usar a função `create()` do pacote
 `devtools` para criar um "esqueleto" inicial com os arquivos e
 diretórios fundamentais de um pacote. Portanto:
 
-```{r}
+```{r comment = NA}
 library(devtools)
 create("meupacote", rstudio = FALSE)
 ```
