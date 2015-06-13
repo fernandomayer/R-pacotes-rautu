@@ -104,14 +104,9 @@ no pacote são (nenhum deles serão abordados aqui):
   exemplos para aplicação das funções do pacote.
 
 Abaixo serão especificados os detalhes para a criação de cada um dos
-componentes obrigatórios. descritos acima.
+componentes obrigatórios descritos acima.
 
-## `R/`: Funções
-
-Se você já possui um diretório `R/` contendo apenas funções do R
-(arquivos `.R`), então a maior parte do problema já está
-resolvido. Basta seguir o restante do texto para ver como criar os
-outros componentes do pacote.
+## `DESCRIPTION`: Caracterização do pacote
 
 Caso você queira começar um pacote do início, as opções são: 1) criar
 todos os componentes (diretórios e arquivos) manualmente e ir
@@ -126,22 +121,26 @@ create("meupacote", rstudio = FALSE)
 ```
 
 ```
-Creating package meupacote in .
-No DESCRIPTION found. Creating with values:
+Error: Directory already exists
 ```
 
-```
-Package: meupacote
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph)
-Depends: R (>= 3.2.0)
-License: What license is it under?
-LazyData: true
-```
+Como pode ser observado na saída acima, esse comando cria um diretório
+chamado `meupacote`, e já cria um arquivo `DESCRIPTION` com o conteúdo
+acima.
 
-irá criar
+## `R/`: Funções
+
+Se você já possui um diretório `R/` contendo apenas funções do R
+(arquivos `.R`), então a maior parte do problema já está
+resolvido. Basta seguir o restante do texto para ver como criar os
+outros componentes do pacote.
+
+## `man`: Documentação
+
+
+
+## `NAMESPACE`: Organização
+
 
 
 [John M. Chambers]: http://statweb.stanford.edu/~jmc4/
