@@ -139,6 +139,35 @@ componentes obrigatórios criados acima.
 
 ## `DESCRIPTION`: Caracterização do pacote
 
+O arquivo `DESCRIPTION` é quem caracteriza o seu pacote: que é (são)
+o(s) autor(es), uma breve descrição do que ele faz, qual o tipo de
+licença, quais pacotes são necessários para que o seu funcione, e mais
+alguns detalhes.
+
+Seguindo os campos do `DESCRIPTION` criados anteriormente com a função
+`create()`, temos alguns detalhes:
+
+* **Title**: é simplesmente o nome do seu pacote
+* **Version**: a versão inicia (ou atual do pacote). O versionamento de
+  qualquer pedaço de software é uma coisa muito importante e não há um
+  consenso de que exista um padrão para todos os casos. No entanto, nos
+  pacotes do R, recomenda-se que as versões sejam do tipo `x.y-z` ou
+  `x.y.z` onde `x` seria a versão "maior", `y` a versão "menor", e `z`
+  os "patches" (alterações menores no código, como correção de bugs por
+  exemplo).
+* **Authors@R**: O autor, ou os autores e contribuidores do pacote. Este
+  campo pode ser preenchido com uma função do R, no formato que está:
+```
+person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+```
+Se tiver mais de um autor, eles podem ser concatenados com a função
+`c()`, por exemplo, `c(person(...), person(...))`. O argumento `role`
+é importante pois é ele que identifica o papel de cada autor no
+desenvolvimento do pacote. Por padrão, é necessário ter um (e somente
+um) autor `"aut"` e um mantenedor `"cre"`, que pode ou não ser a mesma
+pessoa. Outros papéis, como por exemplo o de um contribuidor
+(`"ctb"`), e outros detalhes dessa função estão em `?person`.
+
 
 ## `R/`: Funções
 
