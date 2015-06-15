@@ -203,7 +203,7 @@ pacote. Algumas opções comuns são: `CC0` (nenhum tipo de restrição),
 `MIT` (prevê atribuição mas é bastante permissiva), e `GPL-3` (a mais
 utilizada, requer que qualquer trabalho derivado do seu seja distribuido
 com a mesma licença). Para mais opções e detalhes sobre licenças de
-software livre, consulte [http://choosealicense.com]().
+software livre, consulte [choosealicense.com][].
 
 ```
 LazyData: true
@@ -216,6 +216,23 @@ inicialização do pacote. Isso garante mais agilidade para carregar o
 pacote e economiza memória caso os dados não sejam utilizados
 (especialmente se as bases de dadpos forem gandes).
 
+Outros campos do arquivo `DESCRIPTION` que serão necessários caso seu
+pacote possua dependências:
+
+* `Imports:` uma lista, separada por vígulas, dos pacotes dos quais o
+  seu pacote precisa para funcionar. Estes são os pacotes que o seu
+  depende, portanto eles também serão instalados (se já não estiverem),
+  quando o seu for instalado. Colocar um pacote nesse campo garante que
+  o pacote estará **instalado**, mas não que ele será carregado toda que
+  vez que o seu pacote for carregado. Para utilizar funções de outros
+  pacotes corretamente é necessário especifições da forma
+  `pacote::funcao()` ou então utilizar o arquivo `NAMESPACE` conforme
+  veremos abaixo.
+* `Suggests:` os pacotes listados aqui não serão instalados junto com o
+  seu. Eles podem ser usados, mas não são necessários. Por exemplo, você
+  pode usar um pacote apenas para usar alguma base de dados ou apenas
+  uma função. Use esse campo apenas se o seu pacote puder funcionar
+  mesmo sem os pacotes especificados.
 
 ## `R/`: Funções
 
@@ -233,3 +250,4 @@ outros componentes do pacote.
 
 
 [John M. Chambers]: http://statweb.stanford.edu/~jmc4/
+[choosealicense.com]: http://choosealicense.com
