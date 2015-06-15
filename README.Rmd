@@ -2,6 +2,10 @@
 
 Criação de pacotes para o R: uma rápida introdução
 
+```{r include=FALSE,cache=FALSE}
+opts_chunk$set(cache = TRUE)
+```
+
 ## Motivação
 
 Como já dizia [John M. Chambers][] quando criou a linguagem S
