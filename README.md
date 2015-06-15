@@ -164,26 +164,74 @@ alguns detalhes.
 Seguindo os campos do `DESCRIPTION` criados anteriormente com a função
 `create()`, temos alguns detalhes:
 
-* **Title**: é simplesmente o nome do seu pacote
-* **Version**: a versão inicia (ou atual do pacote). O versionamento de
-  qualquer pedaço de software é uma coisa muito importante e não há um
-  consenso de que exista um padrão para todos os casos. No entanto, nos
-  pacotes do R, recomenda-se que as versões sejam do tipo `x.y-z` ou
-  `x.y.z` onde `x` seria a versão "maior", `y` a versão "menor", e `z`
-  os "patches" (alterações menores no código, como correção de bugs por
-  exemplo).
-* **Authors@R**: O autor, ou os autores e contribuidores do pacote. Este
-  campo pode ser preenchido com uma função do R, no formato que está:
 ```
-person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Package: meupacote
 ```
-Se tiver mais de um autor, eles podem ser concatenados com a função
-`c()`, por exemplo, `c(person(...), person(...))`. O argumento `role`
-é importante pois é ele que identifica o papel de cada autor no
+É simplesmente o nome do seu pacote.
+
+```
+Title: What the Package Does (one line, title case)
+```
+Uma breve descrição (de uma linha) sobre o que o seu pacote faz.
+
+```
+Version: 0.0.0.9000
+```
+A versão inicia (ou atual do pacote). O versionamento de
+qualquer pedaço de software é uma coisa muito importante e não há um
+consenso de que exista um padrão para todos os casos. No entanto, nos
+pacotes do R, recomenda-se que as versões sejam do tipo `x.y-z` ou
+`x.y.z` onde `x` seria a versão "maior", `y` a versão "menor", e `z`
+os "patches" (alterações menores no código, como correção de bugs por
+exemplo).
+
+```
+Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+```
+O autor, ou os autores e contribuidores do pacote. Este campo pode ser
+preenchido com a função `person()` do R, no formato que está
+apresentada. Se tiver mais de um autor, eles podem ser concatenados com
+a função `c()`, por exemplo, `c(person(...), person(...))`. O argumento
+`role` é importante pois é ele que identifica o papel de cada autor no
 desenvolvimento do pacote. Por padrão, é necessário ter um (e somente
 um) autor `"aut"` e um mantenedor `"cre"`, que pode ou não ser a mesma
 pessoa. Outros papéis, como por exemplo o de um contribuidor
 (`"ctb"`), e outros detalhes dessa função estão em `?person`.
+
+```
+Description: What the package does (one paragraph)
+```
+Uma descrição um pouco mais detalhada sobre o que o seu pacote faz. É
+preciso ter pelo menos duas frases completas (sim, o R confere isso),
+mas não muito maior do que um parágrafo.
+
+```
+Depends: R (>= 3.2.0)
+```
+Qual a versão do R que o seu pacote depende. É sempre prudente colocar
+uma versão que seja maior ou igual a versão que você está desevolvendo o
+pacote.
+
+```
+License: What license is it under?
+```
+A licença é fundamental se você pretende compartilhar o seu
+pacote. Algumas opções comuns são: `CC0` (nenhum tipo de restrição),
+`MIT` (prevê atribuição mas é bastante permissiva), e `GPL-3` (a mais
+utilizada, requer que qualquer trabalho derivado do seu seja distribuido
+com a mesma licença). Para mais opções e detalhes sobre licenças de
+software livre, consulte [http://choosealicense.com]().
+
+```
+LazyData: true
+```
+Essa opção somente é importante se você pretende distribuir algum
+conjunto de dados com o seu pacote (arquivos `.rda` no diretório
+`data/`). Com a opção acima, os dados só serão carregados se realmente
+forem chamados (com a função `data()`), e não carregados na
+inicialização do pacote. Isso garante mais agilidade para carregar o
+pacote e economiza memória caso os dados não sejam utilizados
+(especialmente se as bases de dadpos forem gandes).
 
 
 ## `R/`: Funções
