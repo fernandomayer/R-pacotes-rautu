@@ -125,8 +125,9 @@ Como pode ser observado na saída acima, esse comando cria um diretório
 chamado `meupacote`, contendo dois arquivos: `DESCRIPTION` e
 `NAMESPACE`, e um diretório: `R/`
 
-```{r echo=FALSE}
-system("cd meupacote && stat -c '%A %n' *")
+```{r echo=FALSE, comment=NA}
+cat(system("cd meupacote && stat -c '%A %n' *", intern = TRUE),
+    sep = "\n")
 ```
 
 Note que na mensagem de criação acima, o arquivo `DESCRIPTION` já é

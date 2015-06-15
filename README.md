@@ -141,6 +141,11 @@ chamado `meupacote`, contendo dois arquivos: `DESCRIPTION` e
 `NAMESPACE`, e um diretório: `R/`
 
 
+```
+-rw-r--r-- DESCRIPTION
+-rw-r--r-- NAMESPACE
+drwxr-xr-x R
+```
 
 Note que na mensagem de criação acima, o arquivo `DESCRIPTION` já é
 preenchido com alguns campos padrão, sendo necessário apenas alterá-los
