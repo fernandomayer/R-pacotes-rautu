@@ -11,6 +11,9 @@ Como já dizia [John M. Chambers][] quando criou a linguagem S
 
 > "... to turn ideas into software, quickly and faithfully."
 
+e transformar usuários em programadores de maneira rápida e
+conveniente.
+
 Se você já explorou um pouco mais do que o potencial básico do R,
 certamente já criou sua própria função (ou várias funções) para fazer
 alguma tarefa específica. A ideia é que se você tiver que realizar uma
@@ -19,7 +22,7 @@ tarefa muitas vezes, então deve criar uma função para fazer isso.
 A criação de um pacote do R pode ter duas motivações principais:
 
 * Agrupar e manter uma série de funções criadas por você e que são
-basicamente de uso próprio ou rotineiro.
+  basicamente de uso próprio ou rotineiro.
 * Compartilhar funções de novos métodos e/ou implementações que você
   tenha criado e queira disponibilizar para outras pessoas usarem.
 
@@ -105,11 +108,6 @@ no pacote são (nenhum deles serão abordados aqui):
   formato binário e comprimido do R, `.rda`), que podem ser usados como
   exemplos para aplicação das funções do pacote.
 
-Abaixo serão especificados os detalhes para a criação de cada um dos
-componentes obrigatórios descritos acima.
-
-## `DESCRIPTION`: Caracterização do pacote
-
 Caso você queira começar um pacote do início, as opções são: 1) criar
 todos os componentes (diretórios e arquivos) manualmente e ir
 alimentando com conteúdo, ou 2) usar a função `create()` do pacote
@@ -139,8 +137,20 @@ LazyData: true
 ```
 
 Como pode ser observado na saída acima, esse comando cria um diretório
-chamado `meupacote`, e já cria um arquivo `DESCRIPTION` com o conteúdo
-acima.
+chamado `meupacote`, contendo dois arquivos: `DESCRIPTION` e
+`NAMESPACE`, e um diretório: `R/`
+
+
+
+Note que na mensagem de criação acima, o arquivo `DESCRIPTION` já é
+preenchido com alguns campos padrão, sendo necessário apenas alterá-los
+com as informações do seu pacote.
+
+Abaixo serão especificados os detalhes para a criação de cada um dos
+componentes obrigatórios criados acima.
+
+## `DESCRIPTION`: Caracterização do pacote
+
 
 ## `R/`: Funções
 
