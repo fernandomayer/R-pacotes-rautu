@@ -121,7 +121,19 @@ create("meupacote", rstudio = FALSE)
 ```
 
 ```
-Error: Directory already exists
+Creating package meupacote in .
+No DESCRIPTION found. Creating with values:
+```
+
+```
+Package: meupacote
+Title: What the Package Does (one line, title case)
+Version: 0.0.0.9000
+Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Description: What the package does (one paragraph)
+Depends: R (>= 3.2.0)
+License: What license is it under?
+LazyData: true
 ```
 
 Como pode ser observado na saída acima, esse comando cria um diretório
@@ -130,7 +142,6 @@ chamado `meupacote`, contendo dois arquivos: `DESCRIPTION` e
 
 
 ```
-drwxr-xr-x cache
 -rw-r--r-- DESCRIPTION
 -rw-r--r-- NAMESPACE
 drwxr-xr-x R
@@ -240,6 +251,22 @@ pacote possua dependências:
   uma função. Use esse campo apenas se o seu pacote puder funcionar
   mesmo sem os pacotes especificados.
 
+Para podermos utilizar esse arquivo para de fato gerarmos um pacote de
+exemplo ao final deste tutorial, vamos modificar alguns campos e
+utilizar o seguinte arquivo `DESCRIPTION`:
+
+```
+Package: meupacote
+Title: Um Pacote de Exemplo
+Version: 0.0-1
+Authors@R: person("Fernando", "Mayer", email = "fernando.mayer@example.com", role = c("aut", "cre"))
+Description: Este pacote serve apenas de tutorial. Mais informacoes
+	     podem ser encontradas no texto do github.
+Depends: R (>= 3.2.0)
+License: GPL-3
+LazyData: true
+```
+
 ## `R/`: Funções
 
 O diretório `R/` irá conter apenas as funções (arquivos `.R`) do seu
@@ -348,10 +375,6 @@ Usando como exemplo a função `soma()` criada acima dentro do arquivo
 #' x <- 3
 #' y <- 4
 #' soma(x = x, y = y)
-#'
-#' ## Erro
-#' z <- "a"
-#' soma(x = x, y = z)
 #'
 #' @export
 soma <- function(x, y){
