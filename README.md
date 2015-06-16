@@ -121,19 +121,7 @@ create("meupacote", rstudio = FALSE)
 ```
 
 ```
-Creating package meupacote in .
-No DESCRIPTION found. Creating with values:
-```
-
-```
-Package: meupacote
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph)
-Depends: R (>= 3.2.0)
-License: What license is it under?
-LazyData: true
+Error: Directory already exists
 ```
 
 Como pode ser observado na saída acima, esse comando cria um diretório
@@ -142,6 +130,7 @@ chamado `meupacote`, contendo dois arquivos: `DESCRIPTION` e
 
 
 ```
+drwxr-xr-x cache
 -rw-r--r-- DESCRIPTION
 -rw-r--r-- NAMESPACE
 drwxr-xr-x R
@@ -253,12 +242,123 @@ pacote possua dependências:
 
 ## `R/`: Funções
 
-Se você já possui um diretório `R/` contendo apenas funções do R
-(arquivos `.R`), então a maior parte do problema já está
-resolvido. Basta seguir o restante do texto para ver como criar os
-outros componentes do pacote.
+O diretório `R/` irá conter apenas as funções (arquivos `.R`) do seu
+pacote. As funções podem estar em vários arquivos `.R` separados (um
+para cada função) ou em um (ou alguns) arquivo único. A escolha é mais
+uma questão de preferência pessoal, mas como veremos mais adiante,
+utilizar arquivos separados para as funções torna o processo de
+documentação um pouco mais ágil, além de facilitar a manutenção do
+pacote com o tempo.
 
-## `man`: Documentação
+Para exemplificar, vamos criar uma função simples para fazer a soma de
+dois números, e colocá-la dentro do diretório `R/` com o nome `soma.R`
+
+
+```r
+soma <- function(x, y){
+    x + y
+}
+```
+
+Com a função pronta, possivelmente iremos testá-la, e para isso vamos
+utilizar a função `load_all()` do pacote `devtools`. Portanto, de dentro
+de uma seção do R:
+
+
+```r
+load_all()
+```
+
+irá carregar todas as funções que estiverem dentro do diretório `R/`,
+tornado-as disponíveis para uso. Note que seria o mesmo resultado se
+utilizassemos a função `source("soma.R")` para carregar a função, no
+entanto, se tivermos várias funções, e/ou estivermos testando alterações
+em muitas delas, a função `load_all()` é bem mais conveniente. Basta
+fazer as alterações nas funções `.R`, carregá-las com `load_all()`e
+testar novamente. Esse processo geralmente se repete muitas vezes
+durante o desenvolvimento de um pacote.
+
+## `man/`: Documentação
+
+Você deve ter notado que o diretório `man/` não é criado da mesma forma
+que os demais quando utilizamos a função `create()` acima. Isso porque
+esse diretório depende das funções que serão criadas dentro do diretório
+`R/`. No entanto, ele é também é obrigatório para podermos criar um
+pacote mínimo.
+
+Como mencionado anteriormente, a documentação de funções do R segue um
+formato muito parecido com o LaTeX (mas com alguns comandos
+próprios). Cada função criada dentro do diretório `R/`, independente de
+estar em um arquivo separado ou único (com várias funções), deve
+**obrigatoriamente** ter um arquivo correspondente dentro do diretório
+`man/`, com a extensão `.Rd`. No caso da nossa função de exemplo acima,
+que está em um arquivo chamado `soma.R`, precisaremos então de um
+arquivo `soma.Rd` dentro do `man/`.
+
+Existem duas formas de documentar uma função com os arquivos `.Rd`: uma
+é da maneira tradicional, escrevendo manualmente a documentação
+utilizando a linguagem específica e colocando os campos necessários. Os
+detalhes de como fazer isso manualmente estão em
+[Writing R documentation files][]. Outra forma de escrever a
+documentação de uma função é utilizando o pacote `roxygen2`, que utiliza
+algumas tags simples e permite que você escreva a documentação dentro do
+próprio arquivo `.R`. Dessa forma fica muito mais simples alterar ou
+atualizar a documentação de uma função, pois tudo se concentra dentro de
+um único arquivo.
+
+Neste texto vamos utilizar o pacote `roxygen2` para gerar a documentação
+das funções. O primeiro passo é escrever a documentação dentro do
+arquivo `.R`. A documentação usando o `roxygen2` segue o seguinte
+formato:
+
+* Toda documentação começa com um comentário especial, do tipo `#'`
+  (note o `'` depois do `#`).
+* Os campos de documentação são criados a parir de tags que iniciam com
+  `@`, colocados logo após um comentário especial `#'`.
+* Toda a documentação deve ficar diretamente acima do início da função.
+
+Usando como exemplo a função `soma()` criada acima dentro do arquivo
+`soma.R`, podemos documentá-la com o `roxygen2` da seguinte forma:
+
+
+```r
+#' @title Faz a Soma de Dois Numeros
+#' @name soma
+#'
+#' @description Uma (incrivel) funcao que pega dois numeros e faz a
+#'     soma. Utilize este campo para descrever melhor o proposito de
+#'     sua funcao e o que ela e capaz de fazer.
+#'
+#' @param x Um numero
+#' @param y Outro numero
+#'
+#' @details Utilize este campo para escrever detalhes mais tecnicos da
+#'     sua funcao (se necessario), ou para detalhar melhor como
+#'     utilizar determinados argumentos.
+#'
+#' @return A soma dos numeros \code{x} e \code{y}.
+#'
+#' @author Fernando Mayer
+#'
+#' @seealso \code{\link[base]{sum}}, \code{\link[base]{+}}
+#'
+#' @examples
+#' soma(2, 2)
+#'
+#' x <- 3
+#' y <- 4
+#' soma(x = x, y = y)
+#'
+#' ## Erro
+#' z <- "a"
+#' soma(x = x, y = z)
+#'
+#' @export
+soma <- function(x, y){
+    x + y
+}
+```
+
 
 
 
@@ -268,3 +368,4 @@ outros componentes do pacote.
 
 [John M. Chambers]: http://statweb.stanford.edu/~jmc4/
 [choosealicense.com]: http://choosealicense.com
+[Writing R documentation files]: [http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files]
