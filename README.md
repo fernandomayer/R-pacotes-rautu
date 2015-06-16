@@ -296,6 +296,10 @@ de uma seção do R:
 load_all()
 ```
 
+```
+## Loading meupacote
+```
+
 irá carregar todas as funções que estiverem dentro do diretório `R/`,
 tornado-as disponíveis para uso. Note que seria o mesmo resultado se
 utilizassemos a função `source("soma.R")` para carregar a função, no
@@ -387,12 +391,13 @@ pacote `devtools`:
 
 
 ```r
-## document()
+document()
 ```
 
 ```
 ## Updating meupacote documentation
 ## Loading meupacote
+## First time using roxygen2 4.0. Upgrading automatically...
 ```
 
 

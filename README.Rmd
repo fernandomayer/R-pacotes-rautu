@@ -273,8 +273,11 @@ Com a função pronta, possivelmente iremos testá-la, e para isso vamos
 utilizar a função `load_all()` do pacote `devtools`. Portanto, de dentro
 de uma seção do R:
 
-```{r eval=FALSE}
+```{r echo=TRUE, eval=FALSE}
 load_all()
+```
+```{r echo=FALSE, eval=TRUE}
+load_all("meupacote/")
 ```
 
 irá carregar todas as funções que estiverem dentro do diretório `R/`,
@@ -365,8 +368,10 @@ soma <- function(x, y){
 Para gerar a documentação agora basta utilizar a função `document()` do
 pacote `devtools`:
 
-```{r echo=1, eval=2}
+```{r echo=TRUE, eval=FALSE}
 document()
+```
+```{r echo=FALSE, eval=TRUE}
 document("meupacote/")
 ```
 
