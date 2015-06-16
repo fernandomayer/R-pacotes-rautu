@@ -25,10 +25,6 @@
 #' y <- 4
 #' soma(x = x, y = y)
 #'
-#' ## Erro
-#' z <- "a"
-#' soma(x = x, y = z)
-#'
 #' @export
 soma <- function(x, y){
     x + y
