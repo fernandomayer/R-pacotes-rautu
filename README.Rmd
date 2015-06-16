@@ -125,7 +125,7 @@ Como pode ser observado na saída acima, esse comando cria um diretório
 chamado `meupacote`, contendo dois arquivos: `DESCRIPTION` e
 `NAMESPACE`, e um diretório: `R/`
 
-```{r echo=FALSE, comment=NA}
+```{r echo=FALSE, comment=NA, cache=TRUE}
 cat(system("cd meupacote && stat -c '%A %n' *", intern = TRUE),
     sep = "\n")
 ```
@@ -391,8 +391,8 @@ O resultado da chamada dessa função é:
 No nosso exemplo, a chamada da função `document()` criou o diretório
 `man/` e gerou o arquivo `soma.Rd` com o seguinte conteúdo
 
-```{r echo=FALSE}
-system("cat meupacote/man/soma.Rd")
+```{r echo=FALSE, comment=NA}
+cat(system("cat meupacote/man/soma.Rd", intern = TRUE), sep = "\n")
 ```
 
 
