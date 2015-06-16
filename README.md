@@ -382,6 +382,18 @@ soma <- function(x, y){
 }
 ```
 
+Para gerar a documentação agora basta utilizar a função `document()` do
+pacote `devtools`:
+
+
+```r
+## document()
+```
+
+```
+## Updating meupacote documentation
+## Loading meupacote
+```
 
 
 
