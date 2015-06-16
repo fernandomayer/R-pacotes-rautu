@@ -121,19 +121,7 @@ create("meupacote", rstudio = FALSE)
 ```
 
 ```
-Creating package meupacote in .
-No DESCRIPTION found. Creating with values:
-```
-
-```
-Package: meupacote
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph)
-Depends: R (>= 3.2.0)
-License: What license is it under?
-LazyData: true
+Error: Directory already exists
 ```
 
 Como pode ser observado na saída acima, esse comando cria um diretório
@@ -143,6 +131,7 @@ chamado `meupacote`, contendo dois arquivos: `DESCRIPTION` e
 
 ```
 -rw-r--r-- DESCRIPTION
+drwxr-xr-x man
 -rw-r--r-- NAMESPACE
 drwxr-xr-x R
 ```
@@ -397,8 +386,25 @@ document()
 ```
 ## Updating meupacote documentation
 ## Loading meupacote
-## First time using roxygen2 4.0. Upgrading automatically...
 ```
+
+> Observação: o comando `document()` do pacote `devtools` é de fato um
+> "wraper" para a função `roxygenise()` do pacote `roxygen2`.
+
+O resultado da chamada dessa função é:
+
+* Criar o diretório `man/` se ele ainda não existir, ou se for a
+  primeira vez que estiver criando a doscumentação com a função
+  `document()`.
+* Gerar os arquivos `.Rd` dentro de `man/` (se ainda não existirem)
+  correspondentes às funções no diretório `.R`.
+* Se os arquivos `.Rd` já existirem, a chamada da função `document()`
+  irá apenas atualizar apenas os arquivos que forem modificados.
+
+No nosso exemplo, a chamada da função `document()` criou o diretório
+`man/` e gerou o arquivo `soma.Rd` com o seguinte conteúdo
+
+
 
 
 
