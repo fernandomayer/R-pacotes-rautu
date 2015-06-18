@@ -389,7 +389,7 @@ O resultado da chamada dessa função é:
   irá apenas atualizar apenas os arquivos que forem modificados.
 * Escrever no arquivo `NAMESPACE` as funções a serem exportadas ou
   importadas. Veremos mais detalhes abaixo na seção
-  [`NAMESPACE`](#`NAMESPACE`).
+  [`NAMESPACE`](#namespace-organização).
 
 No nosso exemplo, a chamada da função `document()` criou o diretório
 `man/` e gerou o arquivo `soma.Rd` com o seguinte conteúdo
