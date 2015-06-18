@@ -406,17 +406,20 @@ document()
 ```
 
 > Observação: o comando `document()` do pacote `devtools` é de fato um
-> "wraper" para a função `roxygenise()` do pacote `roxygen2`.
+> "wrapper" para a função `roxygenise()` do pacote `roxygen2`.
 
 O resultado da chamada dessa função é:
 
 * Criar o diretório `man/` se ele ainda não existir, ou se for a
-  primeira vez que estiver criando a doscumentação com a função
+  primeira vez que estiver criando a documentação com a função
   `document()`.
 * Gerar os arquivos `.Rd` dentro de `man/` (se ainda não existirem)
   correspondentes às funções no diretório `.R`.
 * Se os arquivos `.Rd` já existirem, a chamada da função `document()`
   irá apenas atualizar apenas os arquivos que forem modificados.
+* Escrever no arquivo `NAMESPACE` as funções a serem exportadas ou
+  importadas. Veremos mais detalhes abaixo na seção
+  [`NAMESPACE`](#`NAMESPACE`).
 
 No nosso exemplo, a chamada da função `document()` criou o diretório
 `man/` e gerou o arquivo `soma.Rd` com o seguinte conteúdo
