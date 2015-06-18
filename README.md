@@ -7,7 +7,7 @@ Criação de pacotes para o R: uma rápida introdução
 ## Motivação
 
 Como já dizia [John M. Chambers][] quando criou a linguagem S
-(predecessora do R), o objetivo da linguagen é
+(predecessora do R), o objetivo da linguagem é
 
 > "... to turn ideas into software, quickly and faithfully."
 
@@ -397,6 +397,12 @@ document()
 ```
 ## Updating meupacote documentation
 ## Loading meupacote
+## First time using roxygen2 4.0. Upgrading automatically...
+```
+
+```
+## Writing NAMESPACE
+## Writing soma.Rd
 ```
 
 > Observação: o comando `document()` do pacote `devtools` é de fato um

@@ -9,7 +9,7 @@ Criação de pacotes para o R: uma rápida introdução
 ## Motivação
 
 Como já dizia [John M. Chambers][] quando criou a linguagem S
-(predecessora do R), o objetivo da linguagen é
+(predecessora do R), o objetivo da linguagem é
 
 > "... to turn ideas into software, quickly and faithfully."
 
@@ -371,7 +371,7 @@ pacote `devtools`:
 ```{r echo=TRUE, eval=FALSE}
 document()
 ```
-```{r echo=FALSE, eval=TRUE}
+```{r echo=FALSE, eval=TRUE, cache=TRUE}
 document("meupacote/")
 ```
 
