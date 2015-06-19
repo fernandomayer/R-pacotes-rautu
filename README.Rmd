@@ -423,7 +423,7 @@ Alguns detalhes das tags utilizadas nesse exemplo do `roxygen2`:
 * `@description`: descreve o que a função faz e pra que ela serve, de
   maneira geral.
 * `@param`: descreve o que cada argumento da função faz. Deve ser sempre
-  no formato: `@param <espaço> argumento <espaço> descrição do
+  no formato: `@param <kbd>SPC</kbd> argumento <kbd>SPC</kbd> descrição do
   argumento`.
 * `@details`: espaço para escrever mais detalhes, geralmente mais
   técnicos, sobre a sua função, e/ou para detalhar alguma coisa
