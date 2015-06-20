@@ -566,7 +566,15 @@ Por padrão, quando iniciamos um pacote com a função `create()` do pacote
 exportPattern("^[^\\.]")
 ```
 
-E após:
+No entanto, se você não quiser exportar todas as funções dentro do
+diretório `R/`, será necessário especificar quais funções deseja
+exportar. Para isso, basta usar a tag `@export` na documentação da
+função com o `roxygen2` (assim como usamos na documentação da função
+`soma.R`) acima. A função `document()` é a responsável por verificar as
+funções que possuem `@export` e colocá-las adequadamente no arquivo
+`NAMESPACE`. Dessa forma, usando o nosso exemplo, após escrever a função
+`soma.R` com `@export` e rodar `document()`, o arquivo `NAMESPACE` agora
+será:
 
 
 ```
@@ -574,6 +582,20 @@ E após:
 
 export(soma)
 ```
+
+Se houverem mais funções exportadas, elas aparecerão nesse arquivo, uma
+em cada linha. Caso existam funções que você não queira exportar, basta
+não colocar a tag `@export` na documentação da função.
+
+### Importando funções
+
+
+
+## Workflow
+
+
+
+## Extra: integração contínua com Travis-CI
 
 
 
