@@ -128,6 +128,9 @@ chamado `meupacote`, contendo dois arquivos: `DESCRIPTION` e
 ```{r echo=FALSE, comment=NA, cache=TRUE}
 cat(system("cd meupacote && stat -c '%A %n' *", intern = TRUE),
     sep = "\n")
+## Armazena o arquivo NAMESPACE original para mostrar o conteudo na
+## secao NAMESPACE abaixo
+namespace <- readLines("meupacote/NAMESPACE")
 ```
 
 Note que na mensagem de criação acima, o arquivo `DESCRIPTION` já é
@@ -238,17 +241,13 @@ Para podermos utilizar esse arquivo para de fato gerarmos um pacote de
 exemplo ao final deste tutorial, vamos modificar alguns campos e
 utilizar o seguinte arquivo `DESCRIPTION`:
 
+```{r include=FALSE}
+file.copy("aux/DESCRIPTION", "meupacote/DESCRIPTION", overwrite = TRUE)
 ```
-Package: meupacote
-Title: Um Pacote de Exemplo
-Version: 0.0-1
-Authors@R: person("Fernando", "Mayer", email = "fernando.mayer@example.com", role = c("aut", "cre"))
-Description: Este pacote serve apenas de tutorial. Mais informacoes
-	     podem ser encontradas no texto do github.
-Depends: R (>= 3.2.0)
-License: GPL-3
-LazyData: true
+```{r echo=FALSE, comment=NA}
+cat(system("cat meupacote/DESCRIPTION", intern = TRUE), sep = "\n")
 ```
+
 
 ## `R/`: Funções
 
@@ -331,52 +330,27 @@ formato:
 Usando como exemplo a função `soma()` criada acima dentro do arquivo
 `soma.R`, podemos documentá-la com o `roxygen2` da seguinte forma:
 
-```{r eval=FALSE}
-#' @title Faz a Soma de Dois Numeros
-#' @name soma
-#'
-#' @description Uma (incrivel) funcao que pega dois numeros e faz a
-#'     soma. Utilize este campo para descrever melhor o proposito de
-#'     sua funcao e o que ela e capaz de fazer.
-#'
-#' @param x Um numero
-#' @param y Outro numero
-#'
-#' @details Utilize este campo para escrever detalhes mais tecnicos da
-#'     sua funcao (se necessario), ou para detalhar melhor como
-#'     utilizar determinados argumentos.
-#'
-#' @return A soma dos numeros \code{x} e \code{y}.
-#'
-#' @author Fernando Mayer
-#'
-#' @seealso \code{\link[base]{sum}}, \code{\link[base]{+}}
-#'
-#' @examples
-#' soma(2, 2)
-#'
-#' x <- 3
-#' y <- 4
-#' soma(x = x, y = y)
-#'
-#' @export
-soma <- function(x, y){
-    x + y
-}
+```{r soma, echo=FALSE, comment=NA, include=FALSE, cache=TRUE}
+file.create("meupacote/R/soma.R")
+file.copy("aux/soma.R", "meupacote/R/soma.R", overwrite = TRUE)
 ```
+```{r echo=FALSE, comment=NA, cache=TRUE}
+cat(system("cat meupacote/R/soma.R", intern = TRUE), sep = "\n")
+```
+
 
 Para gerar a documentação agora basta utilizar a função `document()` do
 pacote `devtools`:
 
-```{r echo=TRUE, eval=FALSE}
+```{r docfalse, echo=TRUE, eval=FALSE}
 document()
 ```
-```{r echo=FALSE, eval=TRUE, cache=TRUE}
+```{r doctrue, echo=FALSE, eval=TRUE, dependson="soma", cache=TRUE}
 document("meupacote/")
 ```
 
 > Observação: o comando `document()` do pacote `devtools` é de fato um
-> "wrapper" para a função `roxygenise()` do pacote `roxygen2`.
+> "wrapper" para a função `roxygenize()` do pacote `roxygen2`.
 
 O resultado da chamada dessa função é:
 
@@ -450,8 +424,50 @@ Alguns detalhes das tags utilizadas nesse exemplo do `roxygen2`:
   pacote (em funções internas ou auxiliares por exemplo), simplesmente
   não inclua esta tag na documentação.
 
-
 ## `NAMESPACE`: Organização
+
+O `NAMESPACE` é um arquivo que ajuda a organizar as funções exportadas e
+importadas pelo seu pacote. Ele ajuda um pacote a ser auto contido, no
+sentido de que ele não vai interferir no funcionamento de outros
+pacotes, e que também os outros pacotes não irão interferir no
+funcionamento do seu.
+
+Normalmente, a especuficação do `NAMESPACE` é a parte mais difícil da
+criação de um pacote, mas com o uso do `devtools` como estamos fazendo,
+normalmente não será necessário se preocupar com todos os detalhes que
+envolvem esse arquivo. O mais importante é saber quais funções serão
+exportadas do seu pacote, quais serão imortadas, e de que maneira
+podemos especificar essas funções.
+
+### Exportando funções
+
+O conceito de exportar uma ou mais funções de um pacote, é o de tornar
+estas funções disponíveis para o usuário. No desenvolvimento de um
+pacote, normalmente são criadas algumas funções internas ou auxiliares,
+que são utilizadas por uma ou mais funções principais. Se em nenhum
+momento estas funções precisarem ser utilizadas pelo usuário do pacote,
+então elas não precisam (e não devem) ser exportadas, para minimizar a
+possibilidade de conflito com outros pacotes.
+
+Quando um pacote é carregado com `library()` ou `require()`, ele é
+"anexado" (*attached*) ao workspace do usuário, tornando assim as
+funções exportadas disponíveis para serem utilizadas. Você pode conferir
+a lista de pacotes anexados em seu workspace com `search()`.
+
+Por padrão, quando iniciamos um pacote com a função `create()` do pacote
+`devtools`, é criado um arquivo `NAMESPACE` que exporta automaticamente
+**todas** as funções que forem criadas, e que não começem com um ponto
+`.`. O arquivo `NAMESPACE` inicial possui essa especificação:
+
+```{r echo=FALSE, comment=NA, cache=TRUE}
+cat(namespace, sep = "\n")
+```
+
+E após:
+
+```{r echo=FALSE, comment=NA}
+cat(system("cat meupacote/NAMESPACE", intern = TRUE), sep = "\n")
+```
 
 
 
