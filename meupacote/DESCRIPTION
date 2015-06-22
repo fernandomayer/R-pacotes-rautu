@@ -7,3 +7,4 @@ Description: Este pacote serve apenas de tutorial. Mais informacoes
 Depends: R (>= 3.2.0)
 License: GPL-3
 LazyData: true
+Imports: lattice
