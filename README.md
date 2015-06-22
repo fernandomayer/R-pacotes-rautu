@@ -840,7 +840,7 @@ check()
 ## * checking for LF line-endings in source and make files
 ## * checking for empty or unneeded directories
 ## * building ‘meupacote_0.0-1.tar.gz’
-## * using log directory ‘/tmp/RtmpG8HerP/meupacote.Rcheck’
+## * using log directory ‘/tmp/RtmpcbMeYa/meupacote.Rcheck’
 ## * using R version 3.2.1 (2015-06-18)
 ## * using platform: x86_64-unknown-linux-gnu (64-bit)
 ## * using session charset: UTF-8
@@ -898,6 +898,58 @@ algumas coisas precisam ser arrumadas. Se houverem `ERROR`s, o processo
 de checagem é parado e não é possível instalar o seu pacote até que no
 seja arrumado.
 
+Finalmente para construir o pacote, usaremos a função `build()` do
+pacote `devtools`:
+
+
+```r
+build()
+```
+
+```
+## '/usr/local/lib64/R/bin/R' --no-site-file --no-environ --no-save  \
+##   --no-restore CMD build  \
+##   '/home/fpmayer/GitHub/R-pacotes-rautu/meupacote' --no-resave-data  \
+##   --no-manual
+```
+
+```
+## * checking for file ‘/home/fpmayer/GitHub/R-pacotes-rautu/meupacote/DESCRIPTION’ ... OK
+## * preparing ‘meupacote’:
+## * checking DESCRIPTION meta-information ... OK
+## * checking for LF line-endings in source and make files
+## * checking for empty or unneeded directories
+## * building ‘meupacote_0.0-1.tar.gz’
+## [1] "/home/fpmayer/GitHub/R-pacotes-rautu/meupacote_0.0-1.tar.gz"
+```
+
+O resultado da chamada dessa função é o arquivo `meupacote_0.0-1.tar.gz` que contém o código-fonte do seu pacote e está pronto para
+ser distribuído e instalado no Linux e Mac.
+
+Para gerar um arquivo binário (`.zip`) para instalar no Windows, o
+processo é mais complicado (como tudo no Windows). Esse arquivo binário
+só é possível ser gerado de dentro do Windows, o que, em muitos casos,
+ão está disponível para uso. Uma opção então é utilizar o
+[win-builder][], um servidor Windows disponibilizado pelos mantenedores
+do R para que pessoas sem acesso ao Windows possam gerar arquivos
+binários de pacotes. O processo consiste em entrar na página e enviar o
+código-fonte (`.tar.gz`) por upload. Em alguns minutos você recebe um
+email com o link para baixar a versão binária do seu pacote para
+Windows.
+
+Como estamos usando o `devtools`, podemos apenas utilizar a função
+`build_win()`, que irá fazer todo esse processo automaticamente. O link
+com a versão binária do arquivo será enviado para o email colocado no
+campo `Maintainer` no arquivo `DESCRIPTION`, por isso é importante que
+seja um email válido.
+
+
+```r
+build_win()
+```
+
+Uma vantagem dessa função é que ela também roda uma checagem para ver se
+o pacote funcionará adequadamente no Windows.
 
 ## Workflow
 
@@ -921,3 +973,4 @@ seja arrumado.
 [choosealicense.com]: http://choosealicense.com
 [Writing R documentation files]: [http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files]
 [Rd format]: http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Rd-format
+[win-builder]: http://win-builder.r-project.org/

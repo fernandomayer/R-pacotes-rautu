@@ -674,6 +674,50 @@ algumas coisas precisam ser arrumadas. Se houverem `ERROR`s, o processo
 de checagem é parado e não é possível instalar o seu pacote até que no
 seja arrumado.
 
+Finalmente para construir o pacote, usaremos a função `build()` do
+pacote `devtools`:
+
+```{r buildfalse, echo=TRUE, eval=FALSE}
+build()
+```
+```{r buildtrue1, echo=FALSE, eval=TRUE, cache=TRUE, results='hide'}
+## Essa chamada so mostra a parte inicial do output
+build("meupacote/")
+```
+```{r buildtrue2, echo=FALSE, eval=TRUE, cache=TRUE}
+## Para mostrar o output da chamada da funcao foi necessario chamar o
+## Rscript dentro do system
+cat(system("Rscript -e 'build(\"meupacote/\")'", intern = TRUE),
+    sep = "\n")
+```
+
+O resultado da chamada dessa função é o arquivo ``r dir(pattern =
+".tar.gz")`` que contém o código-fonte do seu pacote e está pronto para
+ser distribuído e instalado no Linux e Mac.
+
+Para gerar um arquivo binário (`.zip`) para instalar no Windows, o
+processo é mais complicado (como tudo no Windows). Esse arquivo binário
+só é possível ser gerado de dentro do Windows, o que, em muitos casos,
+ão está disponível para uso. Uma opção então é utilizar o
+[win-builder][], um servidor Windows disponibilizado pelos mantenedores
+do R para que pessoas sem acesso ao Windows possam gerar arquivos
+binários de pacotes. O processo consiste em entrar na página e enviar o
+código-fonte (`.tar.gz`) por upload. Em alguns minutos você recebe um
+email com o link para baixar a versão binária do seu pacote para
+Windows.
+
+Como estamos usando o `devtools`, podemos apenas utilizar a função
+`build_win()`, que irá fazer todo esse processo automaticamente. O link
+com a versão binária do arquivo será enviado para o email colocado no
+campo `Maintainer` no arquivo `DESCRIPTION`, por isso é importante que
+seja um email válido.
+
+```{r eval=FALSE}
+build_win()
+```
+
+Uma vantagem dessa função é que ela também roda uma checagem para ver se
+o pacote funcionará adequadamente no Windows.
 
 ## Workflow
 
@@ -697,3 +741,4 @@ seja arrumado.
 [choosealicense.com]: http://choosealicense.com
 [Writing R documentation files]: [http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files]
 [Rd format]: http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Rd-format
+[win-builder]: http://win-builder.r-project.org/
