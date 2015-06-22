@@ -376,7 +376,7 @@ O resultado da chamada dessa função é:
   irá apenas atualizar os arquivos que foram modificados.
 * Escrever no arquivo `NAMESPACE` as funções a serem exportadas ou
   importadas. Veremos mais detalhes abaixo na seção
-  [`NAMESPACE`](#namespace-organização).
+  [`NAMESPACE`][6].
 
 No nosso exemplo, a chamada da função `document()` criou o diretório
 `man/` e gerou o arquivo `soma.Rd` com o seguinte conteúdo
@@ -432,7 +432,7 @@ Alguns detalhes das tags utilizadas nesse exemplo do `roxygen2`:
 * `@export`: esta tag é a responsável por sua função ficar disponível
   para os usuários, e é o que faz a função ser incluida no `NAMESPACE`
   (mais detalhes serão vistos na seção
-  [`NAMESPACE`](#namespace-organização) abaixo). Se você não quer que a
+  [`NAMESPACE`][6] abaixo). Se você não quer que a
   função seja disponibilizada para os usuários quando carregarem o seu
   pacote (em funções internas ou auxiliares por exemplo), simplesmente
   não inclua esta tag na documentação.
@@ -498,7 +498,48 @@ uma boa prática escrever a documentação até mesmo para você no futuro).
 
 ### Importando funções
 
-Já vimos anteriromemte em [`DESCRIPTION`](#description-caracterização-do-pacote)
+Normalmente as funções que estamos criando para um pacote utilizam
+funções de outros pacotes. Todas as funções dos pacotes que são
+distribuídos e automaticamente carregados quando você inicia uma sessão
+do R, são disponíveis para serem utilizadas em qualquer outra função,
+sem a necessidade de qualquer especificação adicional. Estes pacotes
+básicos do R são: `base`, `utils`, `datasets`, `grDevices`, `graphics`,
+`stats`, e `methods`. Esse conjunto de pacotes já garante uma grande
+quantidade de funções, no entanto, algumas vezes podem ser necessárias
+funções específicas de outros pacotes.
+
+Existem três formas básicas de importar, ou seja, utilizar funções de
+outros pacotes dentro do seu pacote:
+
+1. `pacote::funcao()`: chamar uma função utilizando o operador `::` é
+   recomendado quando o função for utilizada poucas vezes. Dessa forma
+   fica claro no seu pacote aonde uma função externa está sendo
+   utilizada.
+2. `@importFrom pacote funcao`: se uma funcao for utilizada váras vezes
+   dentro de um pacote, ou se mais de uma função do mesmo pacote for
+   utilizada, recomenda-se especifica-las com a tag `@importFrom` na
+   documentação `roxygen2`. Dessa forma não é necessário utilizar o
+   operador `::` na chamada das funções, o que torna o código um pouco
+   mais legível se muitas funções externas forem utilizadas.
+3. `@import pacote`: se o seu pacote depende de muitas funções de
+   outro(s) pacote(s), então o mais razoável é importar todas as funções
+   do pacote. Isso é feito utilizando a tag `@import` na documentação do
+   `roxygen2` da função. Dessa forma, todas as funções do pacote estarão
+   disponíveis para serem utilizadas no seu pacote.
+
+Já vimos anteriromemte na seção [`DESCRIPTION`][3] que exite um campo
+`Imports` que serve para especificar quais pacotes o seu depende. Se
+você utilizou qualquer um dos três métodos acima para importar uma ou
+várias funções, então **obrigatoriamente** o pacote que contém estas
+funções deve ser listado no campo `Imports` do arquivo `DESCRIPTION`.
+
+Uma distinção importante é que listar os pacotes no campo `Imports` do
+arquivo `DESCRIPTION`, garante que o usuário terá instalado os pacotes
+necessários para que o seu funcione, mas ele não é o responsável por
+carregar e tornar as funções desse pacote disponível. Esse papel é feito
+por algum dos três métodos citados acima, que por consequência irão
+atualizar o arquivo `NAMESPACE`, que é o verdadeiro responsável por
+carregar os pacotes e funções necessárias para o uso do seu pacote.
 
 
 
