@@ -486,7 +486,7 @@ funções que possuem `@export` e colocá-las adequadamente no arquivo
 `soma.R` com `@export` e rodar `document()`, o arquivo `NAMESPACE` agora
 será:
 
-```{r echo=FALSE, comment=NA}
+```{r echo=FALSE, comment=NA, cache=TRUE}
 cat(system("cat meupacote/NAMESPACE", intern = TRUE), sep = "\n")
 ```
 
@@ -541,6 +541,71 @@ por algum dos três métodos citados acima, que por consequência irão
 atualizar o arquivo `NAMESPACE`, que é o verdadeiro responsável por
 carregar os pacotes e funções necessárias para o uso do seu pacote.
 
+Por exemplo, vamos criar uma função personalizada para fazer um gráfico
+de pontos utilizando a função `xyplot()` do pacote `lattice`. Vamos
+supor que esse gráfico personalizado usa um `x` no lugar do ponto (`pch
+= 4`), e de cor preto (`col = 1`), já que o padrão do `lattice` é azul
+claro. Vamos chamar essa função de `meuxy()` e colocá-la no arquivo
+`meuxy.R` do diretório `R/`. O conteúdo desse arquivo é:
+
+```{r meuxy, echo=FALSE, comment=NA, include=FALSE, cache=TRUE}
+file.create("meupacote/R/meuxy.R")
+file.copy("aux/meuxy.R", "meupacote/R/meuxy.R", overwrite = TRUE)
+```
+```{r echo=FALSE, comment=NA, cache=TRUE}
+cat(system("cat meupacote/R/meuxy.R", intern = TRUE), sep = "\n")
+```
+
+Agora é necessário rodar a função `document()` para gerar o arquivo
+`man/meuxy.Rd` e atualizar o arquivo `NAMESPACE`, com a exportação da
+função `meuxy()`, e a importação da função `xyplot()` do pacote
+`lattice`. 
+
+```{r docfalse1, echo=TRUE, eval=FALSE}
+document()
+```
+```{r doctrue1, echo=FALSE, eval=TRUE, dependson="meuxy", cache=TRUE}
+document("meupacote/")
+```
+
+Note que, na mensagem acima, além de criar o arquivo `meuxy.Rd`, houve
+uma atualização do arquivo `NAMESPACE`, que agora irá conter:
+
+```{r echo=FALSE, comment=NA}
+cat(system("cat meupacote/NAMESPACE", intern = TRUE), sep = "\n")
+```
+Ou seja, já estamos exportando a função `meuxy()`, e importando a função
+`xyplot()` do pacote `lattice`, através da função `importFrom()`,
+colocada no `NAMESPACE`
+
+```{r echo=FALSE, comment=NA}
+cat(system("tail -1 meupacote/NAMESPACE", intern = TRUE), sep = "\n")
+```
+
+Note que, neste exemplo, utilizamos a tag
+
+```{r eval=FALSE}
+#' @importFrom lattice xyplot
+```
+
+Mas poderíamos também ter utilizado o operador `::` diretamente na
+função, por exemplo
+
+```{r eval=FALSE}
+meuxy <- function(x, ...){
+    lattice::xyplot(x, pch = 4, col = 1, ...)
+}
+```
+
+E, nesse caso, não precisariamos usar a tag `@importFrom`. O resultado
+no `NAMESPACE` seria o mesmo. A tag `@import` também poderia ter sido
+utilizada, por exemplo,
+
+```{r eval=FALSE}
+#' @import lattice
+```
+No entanto, nesse caso não há vantagem em importar todo o pacote pois
+estamos utilizando apenas uma função.
 
 
 ## Workflow
