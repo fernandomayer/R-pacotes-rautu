@@ -801,7 +801,102 @@ Imports: lattice
 
 ## Construindo o pacote
 
+A última etapa é finalmente construir o pacote, ou seja, gerar um
+arquivo fonte (ou binário) que pode ser distribuído para os usuários
+instalarem.
 
+Antes de construir o pacote, podemos rodar uma série de checagens para
+conferir se todos os componentes do pacote estão funcionando como seria
+o esperado. Essa checagem é feita com o comando `R CMD check` depois de
+construir o pacote. No entanto, como estamos usando o `devtools`,
+podemos simplificar e utilizar a função `check()` para realizar a mesma
+checagem automaticamente, de dentro de uma sessão do R, e deixar para
+construir o pacote só no final quando tudo estiver funcionando.
+
+Rodando a função `check()`:
+
+
+```r
+check()
+```
+
+```
+## Updating meupacote documentation
+## Loading meupacote
+## '/usr/local/lib64/R/bin/R' --no-site-file --no-environ --no-save  \
+##   --no-restore CMD build  \
+##   '/home/fpmayer/GitHub/R-pacotes-rautu/meupacote' --no-resave-data  \
+##   --no-manual 
+## 
+## '/usr/local/lib64/R/bin/R' --no-site-file --no-environ --no-save  \
+##   --no-restore CMD check '/tmp/RtmpHOxjdA/meupacote_0.0-1.tar.gz'  \
+##   --timings
+```
+
+```
+## * checking for file ‘/home/fpmayer/GitHub/R-pacotes-rautu/meupacote/DESCRIPTION’ ... OK
+## * preparing ‘meupacote’:
+## * checking DESCRIPTION meta-information ... OK
+## * checking for LF line-endings in source and make files
+## * checking for empty or unneeded directories
+## * building ‘meupacote_0.0-1.tar.gz’
+## * using log directory ‘/tmp/RtmpG8HerP/meupacote.Rcheck’
+## * using R version 3.2.1 (2015-06-18)
+## * using platform: x86_64-unknown-linux-gnu (64-bit)
+## * using session charset: UTF-8
+## * checking for file ‘meupacote/DESCRIPTION’ ... OK
+## * this is package ‘meupacote’ version ‘0.0-1’
+## * checking package namespace information ... OK
+## * checking package dependencies ... OK
+## * checking if this is a source package ... OK
+## * checking if there is a namespace ... OK
+## * checking for executable files ... OK
+## * checking for hidden files and directories ... OK
+## * checking for portable file names ... OK
+## * checking for sufficient/correct file permissions ... OK
+## * checking whether package ‘meupacote’ can be installed ... OK
+## * checking installed package size ... OK
+## * checking package directory ... OK
+## * checking DESCRIPTION meta-information ... OK
+## * checking top-level files ... OK
+## * checking for left-over files ... OK
+## * checking index information ... OK
+## * checking package subdirectories ... OK
+## * checking R files for non-ASCII characters ... OK
+## * checking R files for syntax errors ... OK
+## * checking whether the package can be loaded ... OK
+## * checking whether the package can be loaded with stated dependencies ... OK
+## * checking whether the package can be unloaded cleanly ... OK
+## * checking whether the namespace can be loaded with stated dependencies ... OK
+## * checking whether the namespace can be unloaded cleanly ... OK
+## * checking loading without being on the library search path ... OK
+## * checking use of S3 registration ... OK
+## * checking dependencies in R code ... OK
+## * checking S3 generic/method consistency ... OK
+## * checking replacement functions ... OK
+## * checking foreign function calls ... OK
+## * checking R code for possible problems ... OK
+## * checking Rd files ... OK
+## * checking Rd metadata ... OK
+## * checking Rd line widths ... OK
+## * checking Rd cross-references ... OK
+## * checking for missing documentation entries ... OK
+## * checking for code/documentation mismatches ... OK
+## * checking Rd \usage sections ... OK
+## * checking Rd contents ... OK
+## * checking for unstated dependencies in examples ... OK
+## * checking examples ... OK
+## * checking PDF version of manual ... OK
+## * DONE
+## Status: OK
+```
+
+Note que esta checagem é bem completa, e se o status final for `OK`, então
+o pacote está funcionando e pronto para ser instalado. Se nesta checagem
+aparecer no final algum `NOTE`, significa que o pacote funciona mas
+algumas coisas precisam ser arrumadas. Se houverem `ERROR`s, o processo
+de checagem é parado e não é possível instalar o seu pacote até que no
+seja arrumado.
 
 
 ## Workflow

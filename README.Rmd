@@ -639,7 +639,40 @@ cat(system("cat meupacote/DESCRIPTION", intern = TRUE), sep = "\n")
 
 ## Construindo o pacote
 
+A última etapa é finalmente construir o pacote, ou seja, gerar um
+arquivo fonte (ou binário) que pode ser distribuído para os usuários
+instalarem.
 
+Antes de construir o pacote, podemos rodar uma série de checagens para
+conferir se todos os componentes do pacote estão funcionando como seria
+o esperado. Essa checagem é feita com o comando `R CMD check` depois de
+construir o pacote. No entanto, como estamos usando o `devtools`,
+podemos simplificar e utilizar a função `check()` para realizar a mesma
+checagem automaticamente, de dentro de uma sessão do R, e deixar para
+construir o pacote só no final quando tudo estiver funcionando.
+
+Rodando a função `check()`:
+
+```{r checkfalse, echo=TRUE, eval=FALSE}
+check()
+```
+```{r checktrue1, echo=FALSE, eval=TRUE, cache=TRUE}
+## Essa chamada so mostra a parte inicial do output
+check("meupacote/")
+```
+```{r checktrue2, echo=FALSE, eval=TRUE, cache=TRUE}
+## Para mostrar o output da chamada da funcao foi necessario chamar o
+## Rscript dentro do system
+cat(system("Rscript -e 'check(\"meupacote/\")'", intern = TRUE),
+    sep = "\n")
+```
+
+Note que esta checagem é bem completa, e se o status final for `OK`, então
+o pacote está funcionando e pronto para ser instalado. Se nesta checagem
+aparecer no final algum `NOTE`, significa que o pacote funciona mas
+algumas coisas precisam ser arrumadas. Se houverem `ERROR`s, o processo
+de checagem é parado e não é possível instalar o seu pacote até que no
+seja arrumado.
 
 
 ## Workflow
