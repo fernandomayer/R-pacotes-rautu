@@ -16,8 +16,9 @@ Criação de pacotes para o R: uma rápida introdução
 6. [`NAMESPACE`: Organização][6]
   * [Exportando funções][6.1]
   * [Importando funções][6.2]
-7. [Workflow][7]
-8. [Extra: integração contínua com Travis-CI][8]
+7. [Construindo o pacote][7]
+8. [Workflow][8]
+9. [Extra: integração contínua com Travis-CI][9]
 
 ## Motivação
 
@@ -735,8 +736,9 @@ o pacote funcionará adequadamente no Windows.
 [6]: #namespace-organização
 [6.1]: #exportando-funções
 [6.2]: #importando-funções
-[7]: #workflow
-[8]: #extra-integração-contínua-com-travis-ci
+[7]: #construindo-o-pacote
+[8]: #workflow
+[9]: #extra-integração-contínua-com-travis-ci
 [John M. Chambers]: http://statweb.stanford.edu/~jmc4/
 [choosealicense.com]: http://choosealicense.com
 [Writing R documentation files]: [http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files]
