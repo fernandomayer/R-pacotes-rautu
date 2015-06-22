@@ -518,6 +518,9 @@ check_doc()
 ## Checking documentation
 ```
 
+Se nenhuma mensagem de aviso ou erro apareceu acima, então a
+documentação está de acordo com o esperado.
+
 Alguns detalhes das tags utilizadas nesse exemplo do `roxygen2`:
 
 * `@title`: um título curto da função (deve ser capitalizado).
