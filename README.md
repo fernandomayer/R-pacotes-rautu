@@ -4,6 +4,19 @@ Criação de pacotes para o R: uma rápida introdução
 
 
 
+## Sumário
+
+1. [Motivação][1]
+2. [Estrutura de um pacote][1]
+3. [`DESCRIPTION`: Caracterização do pacote][3]
+4. [`R/`: Funções][4]
+5. [`man/`: Documentação][5]
+6. [`NAMESPACE`: Organização][6]
+  6.1. [Exportando funções][6.1]
+  6.2. [Importando funções][6.2]
+7. [Workflow][7]
+8. [Extra: integração contínua com Travis-CI][8]
+
 ## Motivação
 
 Como já dizia [John M. Chambers][] quando criou a linguagem S
@@ -534,11 +547,11 @@ sentido de que ele não vai interferir no funcionamento de outros
 pacotes, e que também os outros pacotes não irão interferir no
 funcionamento do seu.
 
-Normalmente, a especuficação do `NAMESPACE` é a parte mais difícil da
+Normalmente, a especificação do `NAMESPACE` é a parte mais difícil da
 criação de um pacote, mas com o uso do `devtools` como estamos fazendo,
 normalmente não será necessário se preocupar com todos os detalhes que
 envolvem esse arquivo. O mais importante é saber quais funções serão
-exportadas do seu pacote, quais serão imortadas, e de que maneira
+exportadas do seu pacote, quais serão importadas, e de que maneira
 podemos especificar essas funções.
 
 ### Exportando funções
@@ -566,11 +579,11 @@ Por padrão, quando iniciamos um pacote com a função `create()` do pacote
 exportPattern("^[^\\.]")
 ```
 
-No entanto, se você não quiser exportar todas as funções dentro do
+No entanto, se você não quiser exportar todas as funções de dentro do
 diretório `R/`, será necessário especificar quais funções deseja
 exportar. Para isso, basta usar a tag `@export` na documentação da
 função com o `roxygen2` (assim como usamos na documentação da função
-`soma.R`) acima. A função `document()` é a responsável por verificar as
+`soma.R` acima). A função `document()` é a responsável por verificar as
 funções que possuem `@export` e colocá-las adequadamente no arquivo
 `NAMESPACE`. Dessa forma, usando o nosso exemplo, após escrever a função
 `soma.R` com `@export` e rodar `document()`, o arquivo `NAMESPACE` agora
@@ -585,9 +598,13 @@ export(soma)
 
 Se houverem mais funções exportadas, elas aparecerão nesse arquivo, uma
 em cada linha. Caso existam funções que você não queira exportar, basta
-não colocar a tag `@export` na documentação da função.
+não colocar a tag `@export` na documentação da função. (Na verdade, as
+funções não exportadas não precisam nem ser documentadas, mas é sempre
+uma boa prática escrever a documentação até mesmo para você no futuro).
 
 ### Importando funções
+
+Já vimos anteriromemte em [`DESCRIPTION`](#description-caracterização-do-pacote)
 
 
 
@@ -599,6 +616,16 @@ não colocar a tag `@export` na documentação da função.
 
 
 
+[1]: #motivação
+[2]: #estrutura-de-um-pacote
+[3]: #description-caracterização-do-pacote
+[4]: #r-funções
+[5]: #man-documentação
+[6]: #namespace-organização
+[6.1]: #exportando-funções
+[6.2]: #importando-funções
+[7]: #workflow
+[8]: #extra-integração-contínua-com-travis-ci
 [John M. Chambers]: http://statweb.stanford.edu/~jmc4/
 [choosealicense.com]: http://choosealicense.com
 [Writing R documentation files]: [http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files]
