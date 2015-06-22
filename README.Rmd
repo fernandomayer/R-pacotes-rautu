@@ -9,13 +9,13 @@ Criação de pacotes para o R: uma rápida introdução
 ## Sumário
 
 1. [Motivação][1]
-2. [Estrutura de um pacote][1]
+2. [Estrutura de um pacote][2]
 3. [`DESCRIPTION`: Caracterização do pacote][3]
 4. [`R/`: Funções][4]
 5. [`man/`: Documentação][5]
 6. [`NAMESPACE`: Organização][6]
-  6.1. [Exportando funções][6.1]
-  6.2. [Importando funções][6.2]
+  * [Exportando funções][6.1]
+  * [Importando funções][6.2]
 7. [Workflow][7]
 8. [Extra: integração contínua com Travis-CI][8]
 
