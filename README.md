@@ -653,7 +653,8 @@ Já vimos anteriromemte na seção [`DESCRIPTION`][3] que exite um campo
 `Imports` que serve para especificar quais pacotes o seu depende. Se
 você utilizou qualquer um dos três métodos acima para importar uma ou
 várias funções, então **obrigatoriamente** o pacote que contém estas
-funções deve ser listado no campo `Imports` do arquivo `DESCRIPTION`.
+funções deve ser listado no campo `Imports` do arquivo
+`DESCRIPTION`. 
 
 Uma distinção importante é que listar os pacotes no campo `Imports` do
 arquivo `DESCRIPTION`, garante que o usuário terá instalado os pacotes
@@ -772,6 +773,35 @@ utilizada, por exemplo,
 ```
 No entanto, nesse caso não há vantagem em importar todo o pacote pois
 estamos utilizando apenas uma função.
+
+Como mencionameos anteriormente, a importação de funções realizadas até
+aqui, cria as entradas necessárias no arquivo `NAMESPACE` e torna as
+funções disponíveis para o pacote. Sempre que importarmos qualquer
+função, será necessário acresentar o nome do pacote à que a função
+pertence no arquivo `DESCRIPTION`, mais especificamente no campo
+`Imports`. Isso garante que o usuário que instalar o seu pacote também
+terá instalado o pacote necessário para que o seu funcione. Esta
+inserção deve ser feita manualmente, e dessa forma,
+o arquivo `DESCRIPTION` ficaria atualizado com o seguinte conteúdo
+(repare a última linha):
+
+
+```
+Package: meupacote
+Title: Um Pacote de Exemplo
+Version: 0.0-1
+Authors@R: person("Fernando", "Mayer", email = "fernando.mayer@example.com", role = c("aut", "cre"))
+Description: Este pacote serve apenas de tutorial. Mais informacoes
+	     podem ser encontradas no texto do github.
+Depends: R (>= 3.2.0)
+License: GPL-3
+LazyData: true
+Imports: lattice
+```
+
+## Construindo o pacote
+
+
 
 
 ## Workflow
