@@ -261,7 +261,6 @@ file.copy("aux/DESCRIPTION", "meupacote/DESCRIPTION", overwrite = TRUE)
 cat(system("cat meupacote/DESCRIPTION", intern = TRUE), sep = "\n")
 ```
 
-
 ## `R/`: Funções
 
 O diretório `R/` irá conter apenas as funções (arquivos `.R`) do seu
@@ -351,7 +350,6 @@ file.copy("aux/soma.R", "meupacote/R/soma.R", overwrite = TRUE)
 cat(system("cat meupacote/R/soma.R", intern = TRUE), sep = "\n")
 ```
 
-
 Para gerar a documentação agora basta utilizar a função `document()` do
 pacote `devtools`:
 
@@ -402,6 +400,17 @@ Para conferir se a documentação está de acordo com o que você espera,
 você pode conferir a qualquer momento, por exemplo, com `?soma` ou
 `help(soma)`, após rodar a função `load_all()` para carregar a
 documentação atualizada depois de `document()`.
+
+Uma outra forma mais automática de conferir se a documentação está
+escrita de maneira correta, é utilizando a função `check_doc()` do
+pacote `devtools`:
+
+```{r checkdocfalse, echo=TRUE, eval=FALSE}
+check_doc()
+```
+```{r checkdoctrue, echo=FALSE, eval=TRUE, cache=TRUE}
+check_doc("meupacote/")
+```
 
 Alguns detalhes das tags utilizadas nesse exemplo do `roxygen2`:
 

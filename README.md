@@ -282,7 +282,6 @@ License: GPL-3
 LazyData: true
 ```
 
-
 ## `R/`: Funções
 
 O diretório `R/` irá conter apenas as funções (arquivos `.R`) do seu
@@ -403,7 +402,6 @@ soma <- function(x, y){
 }
 ```
 
-
 Para gerar a documentação agora basta utilizar a função `document()` do
 pacote `devtools`:
 
@@ -504,6 +502,21 @@ Para conferir se a documentação está de acordo com o que você espera,
 você pode conferir a qualquer momento, por exemplo, com `?soma` ou
 `help(soma)`, após rodar a função `load_all()` para carregar a
 documentação atualizada depois de `document()`.
+
+Uma outra forma mais automática de conferir se a documentação está
+escrita de maneira correta, é utilizando a função `check_doc()` do
+pacote `devtools`:
+
+
+```r
+check_doc()
+```
+
+```
+## Updating meupacote documentation
+## Loading meupacote
+## Checking documentation
+```
 
 Alguns detalhes das tags utilizadas nesse exemplo do `roxygen2`:
 
