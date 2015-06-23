@@ -273,7 +273,7 @@ utilizar o seguinte arquivo `DESCRIPTION`:
 
 ```
 Package: meupacote
-Title: Um Pacote de Exemplo
+Title: Um Pacote De Exemplo
 Version: 0.0-1
 Authors@R: person("Fernando", "Mayer", email = "fernando.mayer@example.com", role = c("aut", "cre"))
 Description: Este pacote serve apenas de tutorial. Mais informacoes
@@ -789,7 +789,7 @@ o arquivo `DESCRIPTION` ficaria atualizado com o seguinte conteúdo
 
 ```
 Package: meupacote
-Title: Um Pacote de Exemplo
+Title: Um Pacote De Exemplo
 Version: 0.0-1
 Authors@R: person("Fernando", "Mayer", email = "fernando.mayer@example.com", role = c("aut", "cre"))
 Description: Este pacote serve apenas de tutorial. Mais informacoes
@@ -830,7 +830,7 @@ check()
 ##   --no-manual 
 ## 
 ## '/usr/local/lib64/R/bin/R' --no-site-file --no-environ --no-save  \
-##   --no-restore CMD check '/tmp/RtmpHOxjdA/meupacote_0.0-1.tar.gz'  \
+##   --no-restore CMD check '/tmp/RtmpqB83DJ/meupacote_0.0-1.tar.gz'  \
 ##   --timings
 ```
 
@@ -841,7 +841,7 @@ check()
 ## * checking for LF line-endings in source and make files
 ## * checking for empty or unneeded directories
 ## * building ‘meupacote_0.0-1.tar.gz’
-## * using log directory ‘/tmp/RtmpcbMeYa/meupacote.Rcheck’
+## * using log directory ‘/tmp/Rtmpa55hgn/meupacote.Rcheck’
 ## * using R version 3.2.1 (2015-06-18)
 ## * using platform: x86_64-unknown-linux-gnu (64-bit)
 ## * using session charset: UTF-8
