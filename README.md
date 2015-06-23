@@ -1024,6 +1024,14 @@ esse servidor. No caso específico de pacotes do R, este servidor irá
 rodar uma série de instruções pré-programadas, que consistem em
 construir e checar o pacote como um todo em cada commit.
 
+Para que essa integração entre GitHub e Travis-CI funcione, é necessário
+criar um arquivo de configuração no repositório do pacote, contendo
+algumas instruções básicas. Esse arquivo é o `.travis.yml`, e se o seu
+pacote não precisa de nenhuma dependência além das que já estão no
+arquivo `DESCRIPTION`, então basta esse conteúdo:
+
+
+
 
 
 
