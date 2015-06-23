@@ -1031,6 +1031,10 @@ pacote não precisa de nenhuma dependência além das que já estão no
 arquivo `DESCRIPTION`, então basta esse conteúdo:
 
 
+```
+language: r
+sudo: required
+```
 
 
 

@@ -797,7 +797,9 @@ algumas instruções básicas. Esse arquivo é o `.travis.yml`, e se o seu
 pacote não precisa de nenhuma dependência além das que já estão no
 arquivo `DESCRIPTION`, então basta esse conteúdo:
 
-
+```{r echo=FALSE, comment=NA}
+cat(system("head -2 .travis.yml", intern = TRUE), sep = "\n")
+```
 
 
 
