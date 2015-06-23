@@ -929,6 +929,24 @@ build()
 O resultado da chamada dessa função é o arquivo `meupacote_0.0-1.tar.gz` que contém o código-fonte do seu pacote e está pronto para
 ser distribuído e instalado no Linux e Mac.
 
+> NOTA: no mesmo diretório onde você está desenvolvendo o pacote, você
+> pode ter outros arquivos e diretórios. Por exemplo, algumas pessoas
+> preferem ter um diretório que não irá fazer parte do pacote, mas que
+> serve para guardar scripts de teste, bases de dados, material em
+> desenvolvimento, etc. Nestes casos é necessário especificar que estes
+> arquivos e diretórios devem ser ignorados no processo de checagem
+> (`check()`) e construção do pacote (`build()`). Caso algum arquivo ou
+> diretório que não seja comum ao pacote do R, esses comandos retornarão
+> com um erro, e não será possível construir o pacote. Para evitar estes
+> erros e ao mesmo tempo manter esses arquivos e diretórios, liste-os
+> pelo nome no arquivo `.Rbuildignore` na raíz do pacote. Por exemplo,
+> se você tiver o diretório `playground/` e um arquivo chamdo `teste.R`,
+> coloque no arquivo `.Rbuildignore`:
+> ```
+> teste.R
+> playground/
+> ```
+
 Para gerar um arquivo binário (`.zip`) para instalar no Windows, o
 processo é mais complicado (como tudo no Windows). Esse arquivo binário
 só é possível ser gerado de dentro do Windows, o que, em muitos casos,
@@ -1027,6 +1045,13 @@ rodar uma série de instruções pré-programadas, que consistem em
 construir e checar o pacote como um todo em cada commit.
 
 Para que essa integração entre GitHub e Travis-CI funcione, é necessário
+primeiramente acessar o site [https://travis-ci.org]() e permitir o
+acesso da sua conta no GitHub. Feito isso, na sua conta no site do
+Travis-CI irá aparecer uma lista com todos os seus repositórios no
+GitHub. Agora, basta selecionar o repositório do seu pacote, e ele
+estará ligado ao GitHub.
+
+Para completar a integração entre Travis-CI e GitHub é necessário também
 criar um arquivo de configuração no repositório do pacote, contendo
 algumas instruções básicas. Esse arquivo é o `.travis.yml`, e se o seu
 pacote não precisa de nenhuma dependência além das que já estão no
@@ -1038,6 +1063,14 @@ language: r
 sudo: required
 ```
 
+Note que o arquivo `.travis.yml` deve ficar na raíz do seu pacote, ou
+seja, ao lado dos arquivos `DESCRIPTION` e `NAMESPACE`, e dos
+diretórios `R/` e `man/`.
+
+Maiores detalhes da configuração específica do Travis-CI com pacotes do
+R podem ser encontradas em
+[http://docs.travis-ci.com/user/languages/r](). E detalhes gerais estão
+disponíveis em [http://docs.travis-ci.com/user/getting-started]().
 
 
 
