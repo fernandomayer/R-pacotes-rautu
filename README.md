@@ -1006,8 +1006,24 @@ check()
 build()
 ```
 
-
 ## Extra: integração contínua com Travis-CI
+
+O conceito básico de [integração contínua][] é o de sempre estar
+testando as modificações feitas em um software, para minimizar as
+possibilidades de erros quando muitas alterações são feitas. Esse
+conceito é especialmente útil quando um software é desenvolvido por mais
+de uma pessoa, assim sempre que alguém faz uma alteração, os outros
+programadores tem certeza de que nada no código foi quebrado.
+
+O [Travis-CI][] é uma ferramenta que possibilita fazer esse processo de
+integração contínua para pacotes em desenvolvimento do R. O Travis-CI,
+porém, só terá utilidade se o pacote estiver sendo desenvolvido no
+GitHub (como esse). Basicamente o Travis-CI funciona como um servidor, e
+cada commit seu para o repositório do pacote no GitHub será recebido por
+esse servidor. No caso específico de pacotes do R, este servidor irá
+rodar uma série de instruções pré-programadas, que consistem em
+construir e checar o pacote como um todo em cada commit.
+
 
 
 
@@ -1027,3 +1043,5 @@ build()
 [Writing R documentation files]: [http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files]
 [Rd format]: http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Rd-format
 [win-builder]: http://win-builder.r-project.org/
+[integração contínua]: https://en.wikipedia.org/wiki/Continuous_integration
+[Travis-CI]: https://travis-ci.org/
