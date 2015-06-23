@@ -1,5 +1,5 @@
 language: r
 sudo: required
 
-before_install: cd meupacote
+install: cd meupacote
 
