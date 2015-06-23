@@ -1,2 +1,5 @@
 language: r
 sudo: required
+
+before_script: cd meupacote
+
