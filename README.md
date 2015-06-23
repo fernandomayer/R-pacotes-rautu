@@ -6,6 +6,21 @@ Criação de pacotes para o R: uma rápida introdução
 
 
 
+## Prefácio
+
+* Todos os scripts estão propositalmente sem acentos, para evitar
+  conflitos de codificação.
+* Estas notas são altamente baseadas em:
+  * [R packages by Hadley Wickham](http://r-pkgs.had.co.nz/)
+  * [Package Development Cheat Sheet](http://www.rstudio.com/resources/cheatsheets/) 
+  * [Introduction to roxygen2](http://cran-r.c3sl.ufpr.br/web/packages/roxygen2/vignettes/roxygen2.html)
+* O material mais completo e definitivo sobre o desenvolvimento de
+  pacotes no R é o [Writing R extensions](http://cran.r-project.org/doc/manuals/r-release/R-exts.html)
+* Outras fontes de informação importantes:
+  * [Developing R packages by JT Leek](https://github.com/jtleek/rpackages)
+  * [Routinely testing your R package with Travis](http://jtleek.com/protocols/travis_bioc_devel/)
+
+
 ## Sumário
 
 1. [Motivação][1]
@@ -832,7 +847,7 @@ check()
 ##   --no-manual 
 ## 
 ## '/usr/local/lib64/R/bin/R' --no-site-file --no-environ --no-save  \
-##   --no-restore CMD check '/tmp/RtmpqB83DJ/meupacote_0.0-1.tar.gz'  \
+##   --no-restore CMD check '/tmp/RtmpvX7Cxf/meupacote_0.0-1.tar.gz'  \
 ##   --timings
 ```
 
@@ -843,7 +858,7 @@ check()
 ## * checking for LF line-endings in source and make files
 ## * checking for empty or unneeded directories
 ## * building ‘meupacote_0.0-1.tar.gz’
-## * using log directory ‘/tmp/Rtmpa55hgn/meupacote.Rcheck’
+## * using log directory ‘/tmp/RtmpfNqEnZ/meupacote.Rcheck’
 ## * using R version 3.2.1 (2015-06-18)
 ## * using platform: x86_64-unknown-linux-gnu (64-bit)
 ## * using session charset: UTF-8
