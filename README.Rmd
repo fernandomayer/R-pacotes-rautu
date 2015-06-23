@@ -1,5 +1,7 @@
 # R-pacotes-rautu
 
+[![Build Status](https://travis-ci.org/fernandomayer/R-pacotes-rautu.svg)](https://travis-ci.org/fernandomayer/R-pacotes-rautu)
+
 Criação de pacotes para o R: uma rápida introdução
 
 ```{r include=FALSE,cache=FALSE}
