@@ -314,7 +314,8 @@ disponível também um método da função `summary()` para a função
 `packageStatus()`. Portanto,
 
 ```{r}
-summary(packageStatus())
+sps <- capture.output(summary(packageStatus()))
+cat(head(sps, 50), sep = "\n")
 ```
 
 apresenta um resulatdo mais completo. A primeira parte deste resultado
