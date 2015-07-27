@@ -305,7 +305,7 @@ versões mais novas (`upgrade`), e os indisponíveis (`unavailable`). A
 segunda parte do resultado (`Number of available packages`) mostra o
 número de pacotes disponíveis (instalados e não instalados) no
 repositório padrão (definido anteriormente na seção
-[Selecionando um repositório](#Selecionando-um-repositório)).
+[Selecionando um repositório](#Selecionando-um-repositorio)).
 
 Como demonstrado, este comando pode ser muito útil quando o usuário
 deseja saber quantos pacotes estão na sua biblioteca. No entanto, muitas
