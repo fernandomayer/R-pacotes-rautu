@@ -354,7 +354,7 @@ disponível também um método da função `summary()` para a função
 
 ```r
 sps <- capture.output(summary(packageStatus()))
-cat(head(sps, 50), sep = "\n")
+cat(head(sps, 50), "\n", "[[CONTINUA...]]", "\n", sep = "\n")
 ```
 
 ```
@@ -407,7 +407,10 @@ cat(head(sps, 50), sep = "\n")
 ##   [21] "ACDm"                        "acepack"                    
 ##   [23] "acid"                        "acm4r"                      
 ##   [25] "acmeR"                       "ACNE"                       
-##   [27] "acnr"                        "acopula"
+##   [27] "acnr"                        "acopula"                    
+## 
+## 
+## [[CONTINUA...]]
 ```
 
 apresenta um resulatdo mais completo. A primeira parte deste resultado
