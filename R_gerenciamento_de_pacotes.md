@@ -277,11 +277,6 @@ pacote `foo.tar.gz` podemos utilizar diretamente em um terminal
 R CMD INSTALL -l ~/R_environment/my_library foo.tar.gz
 ```
 
-```
-## Warning: invalid package ‘foo.tar.gz’
-## Error: ERROR: no packages specified
-```
-
 É importante que esse comando seja executado no diretório onde se
 encontra o arquivo `foo.tar.gz`. A opção `-l` seguida do caminho para a
 biblioteca (`~/R_environment/my_library`) serve para especificar onde o
@@ -298,13 +293,6 @@ nomes separados por um espaço,
 
 ```sh
 R CMD INSTALL -l ~/R_environment/my_library foo.tar.gz bar.tar.gz baz.tar.gz
-```
-
-```
-## Warning: invalid package ‘foo.tar.gz’
-## Warning: invalid package ‘bar.tar.gz’
-## Warning: invalid package ‘baz.tar.gz’
-## Error: ERROR: no packages specified
 ```
 
 # Gerenciando pacotes instalados {#Sec:gerenc}
@@ -3989,11 +3977,6 @@ criada anteriormente, faça
 
 ```sh
 R CMD REMOVE -l ~/R_environment/my_library foo
-```
-
-```
-## Error in find.package(pkgs, lib) : there is no package called ‘foo’
-## Execution halted
 ```
 
 Note que neste caso é necessário especificar o argumento `-l` com o
