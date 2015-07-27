@@ -48,31 +48,32 @@ entanto, note que em uma instalação padrão do R, apenas o usuário root
 terá privilégios para a instalação de pacotes, já que a biblioteca
 padrão (onde são instalados os pacotes) fica em `R_HOME/library`, onde
 `R_HOME` representa o diretório de instalação padrão do R (geralmente em
-`/usr/local/lib/R`, que somente o root tem permissão de escrita).
+`/usr/local/lib64/R`, que somente o root tem permissão de escrita).
 
 > NOTA: para conferir seu R_HOME use o comando
 ```{r}
 R.home()
 ```
 
-Para resolver esse problema o usuário comum tem duas opções: (a) iniciar
-o R como root, ou (b) criar uma biblioteca particular em uma pasta onde
+Para resolver esse problema o usuário comum tem duas opções: (**a**) iniciar
+o R como root, ou (**b**) criar uma biblioteca particular em uma pasta onde
 ele tem acesso e instalar os pacotes neste diretório. A primeira opção
 aparentemente é mais simples, embora (como em todos os casos) nunca é
-recomendado utilizar programas como root. A segunda opção pode ser mais
-trabalhosa na primeira vez que se cria uma biblioteca particular. No
-entanto, além de não haver a necessidade de iniciar o programa como
-root, existem outros benefícios com esta prática a longo prazo. Dessa
-forma, será apresentado a seguir um mecanismo de gerenciamento de
-pacotes baseado na segunda opção: uma maneira simples de criar uma
-biblioteca particular para o usuário comum.
+recomendado utilizar programas como root. Além disso, o usuário comum
+nunca terá acesso como root (em condições adequadas). A segunda opção
+pode ser mais trabalhosa na primeira vez que se cria uma biblioteca
+particular. No entanto, além de não haver a necessidade de iniciar o
+programa como root, existem outros benefícios com esta prática a longo
+prazo. Dessa forma, será apresentado a seguir um mecanismo de
+gerenciamento de pacotes baseado na segunda opção: uma maneira simples
+de criar uma biblioteca particular para o usuário comum.
 
 Os benefícios deste método vão além daquele mencionado anteriormente.
 Suponha que o usuário optou por instalar pacotes através do login como
 root. Dessa forma todos os pacotes instalados estão na biblioteca padrão
 do R. A próxima vez que o programa for reinstalado (*e.g.* por motivos de
 atualização) todos os pacotes serão perdidos, e o usuário será obrigado
-a reinstalá-los novamente. Utilizando a opção (b), o R pode ser
+a reinstalá-los novamente. Utilizando a opção (**b**), o R pode ser
 reinstalado sem preocupações com isso, pois todos os pacotes instaldos
 pelo usuário continuarão em sua biblioteca particular, o que é uma
 grande vantagem quando muitos pacotes são utilizados.
@@ -81,11 +82,11 @@ grande vantagem quando muitos pacotes são utilizados.
 
 Para criar sua biblioteca particular, o usuário deve escolher um diretório
 no sistema onde ele tenha permissão de escrita. A maneira mais fácil é
-utilizar sua própria pasta `$HOME` (*e.g.* `/home/fernando/` ou
+utilizar sua própria pasta `$HOME` (*e.g.* `/home/fpmayer/` ou
 `~/`). Portanto, criamos então um diretório com um nome qualquer para
-esta tarefa. Neste exemplo, vamos utilizar o diretório `my_library`
-dentro de um diretório chamado `R_environment`, ou seja,
-`~/R_environment/my_library`. Note que estes diretórios devem ser
+esta tarefa. Neste exemplo, vamos utilizar o diretório `library`
+dentro de um diretório chamado `R`, ou seja,
+`~/R/library`. Note que estes diretórios devem ser
 criados previamente.
 
 Nesse momento, nosso desejo é de que o R instale os pacotes neste
@@ -95,13 +96,15 @@ como uma biblioteca. Para isso devemos ajustar a variável de ambiente
 `R_LIBS`, que informa ao programa, durante sua inicialização, onde estão
 os diretórios que servem como bibliotecas. A maneira mais fácil de fazer
 isso é criando o arquivo `.Renviron` na pasta `$HOME` (nesse caso
-`/home/fernando`). Note que esse será um arquivo oculto nesta pasta.
+`/home/fpmayer`). Note que esse será um arquivo oculto nesta pasta.
 Esse arquivo é utilizado para ajustar *apenas* variáveis de ambiente do
 R de uma forma global. Ou seja, não importa onde o R seja iniciado, ele
 irá “ler” este arquivo na sua inicialização. Sendo assim, dentro deste
-arquivos devemos escrever a seguinte linha:
+arquivo devemos escrever a seguinte linha:
 
-    R_LIBS=~/R_environment/my_library
+```{r eval=FALSE}
+R_LIBS=~/R/library
+```
 
 Mais de uma biblioteca pode ser especificada utilizando-se
 ponto-e-vírgula (se você quiser utilizar mais de uma biblioteca
@@ -126,7 +129,7 @@ resultado desta função deve ser
 Nesse momento, seu sistema estará pronto para receber pacotes do CRAN e
 instalá-los em uma biblioteca particular.
 
-## Selecionando um repositório {#subSec:repos}
+## Selecionando um repositório
 
 Antes de começarmos com a instalação de novos pacotes na biblioteca
 particular, vamos selecionar um repositório do CRAN onde os pacotes serão
@@ -167,7 +170,9 @@ outra que se utilize dos repositórios) for utilizada. Sendo assim, crie
 o arquivo `.Rprofile` em sua pasta `$HOME` (*e.g.* `~/.Rprofile`) e
 entre com o seguinte comando dentro desse arquivo:
 
-	options(repos = "http://cran-r.c3sl.ufpr.br")
+```{r eval=FALSE}
+options(repos = "http://cran-r.c3sl.ufpr.br")
+```
 
 Note que o endereço do repositório não precisa necessariamente ser o
 mesmo mostrado aqui. O usuário pode utilizar qualquer endereço de
@@ -219,7 +224,7 @@ instalar o pacote `foo`, podemos fazer
 
 ```{r eval=FALSE}
 install.packages("foo", dependencies = TRUE, 
-                 lib = "~/R_environment/my_library")
+                 lib = "~/R/library")
 ```
 
 Note que o argumento `lib` é utilizado para especificar a biblioteca
@@ -232,7 +237,7 @@ install.packages("foo", dependencies = TRUE)
 ```
 
 irá baixar o pacote `foo` do repositório já especificado anteriormente e
-instalá-lo na biblioteca `~/R_environment/my_library`.
+instalá-lo na biblioteca `~/R/library`.
 
 Para instalar mais de um pacote ao mesmo tempo na mesma biblioteca, a
 função `c()` pode ser utilizada para especificar uma sequência de
@@ -252,12 +257,12 @@ ser utilizado apenas para instalar pacotes. Portanto, para instalar o
 pacote `foo.tar.gz` podemos utilizar diretamente em um terminal
 
 ```{sh eval=FALSE}
-R CMD INSTALL -l ~/R_environment/my_library foo.tar.gz
+R CMD INSTALL -l ~/R/library foo.tar.gz
 ```
 
 É importante que esse comando seja executado no diretório onde se
 encontra o arquivo `foo.tar.gz`. A opção `-l` seguida do caminho para a
-biblioteca (`~/R_environment/my_library`) serve para especificar onde o
+biblioteca (`~/R/library`) serve para especificar onde o
 pacote deve ser instalado. Ao contrário da função `install.packages()`,
 aqui é necessário especificar sua biblioteca particular, pois o arquivo
 `.Renviron` (onde especificamos a variável `R_LIBS`) não é lido pelo
@@ -269,7 +274,7 @@ tempo. Se todos os arquivos-fonte (`.tar.gz`) dos pacotes `foo`, `bar` e
 nomes separados por um espaço,
 
 ```{sh eval=FALSE}
-R CMD INSTALL -l ~/R_environment/my_library foo.tar.gz bar.tar.gz baz.tar.gz
+R CMD INSTALL -l ~/R/library foo.tar.gz bar.tar.gz baz.tar.gz
 ```
 
 # Gerenciando pacotes instalados {#Sec:gerenc}
@@ -299,7 +304,8 @@ aqueles que estão atualizados (`ok`), os que podem ser atualizados para
 versões mais novas (`upgrade`), e os indisponíveis (`unavailable`). A
 segunda parte do resultado (`Number of available packages`) mostra o
 número de pacotes disponíveis (instalados e não instalados) no
-repositório padrão (definido anteriormente na seção [#subSec:repos]).
+repositório padrão (definido anteriormente na seção
+[Selecionando um repositório][]).
 
 Como demonstrado, este comando pode ser muito útil quando o usuário
 deseja saber quantos pacotes estão na sua biblioteca. No entanto, muitas
