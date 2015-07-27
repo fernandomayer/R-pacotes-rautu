@@ -1,4 +1,3 @@
-source("~/.Rprofile")
-options(defaultPackages = c(getOption("defaultPackages"),
-      	"knitr", "devtools"))
+options(repos = "http://cran-r.c3sl.ufpr.br")
+
 
