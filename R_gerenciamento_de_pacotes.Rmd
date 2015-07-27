@@ -1,13 +1,4 @@
----
-title: "Gerenciamento de pacotes no R"
-author: "[Fernando Mayer](http://fernandomayer.github.io)"
-date: "`r Sys.Date()`"
-output:
-  html_document:
-    mathjax: local
-    self_contained: false
----
-
+# Gerenciamento de pacotes no R
 
 # Introdução {#Sec:intro}
 
@@ -260,7 +251,7 @@ pacote a ser instalado não é necessário utilizar a função
 ser utilizado apenas para instalar pacotes. Portanto, para instalar o
 pacote `foo.tar.gz` podemos utilizar diretamente em um terminal
 
-```{shell}
+```{sh}
 R CMD INSTALL -l ~/R_environment/my_library foo.tar.gz
 ```
 
@@ -277,7 +268,7 @@ tempo. Se todos os arquivos-fonte (`.tar.gz`) dos pacotes `foo`, `bar` e
 `baz` estão no mesmo diretório, podemos instalá-los especificando seus
 nomes separados por um espaço,
 
-```{shell}
+```{sh}
 R CMD INSTALL -l ~/R_environment/my_library foo.tar.gz bar.tar.gz baz.tar.gz
 ```
 
@@ -404,7 +395,7 @@ Pacotes também podem ser removidos com o comando `R CMD REMOVE` de um
 *shell* do Linux. Para remover o pacote `foo` da biblioteca particular
 criada anteriormente, faça
 
-```{shell}
+```{sh}
 R CMD REMOVE -l ~/R_environment/my_library foo
 ```
 
