@@ -700,13 +700,14 @@ packageStatus()
 ```
 
 Veja que agora temos um grande número de pacotes instalados na
-biblioteca particular, e um pacote listado na coluna `unavailable`. Este
-pacote "indisponível" é o pacote `meupacote` instalado do GitHub. O
-pacote estar listado como `unavailable` não significa que ele não está
-disponível para uso. Apenas significa que ele não está disponível no
-CRAN. Dessa forma, ele não terá atualizações automáticas por exemplo,
-com `update.packages()`. Na prática, qualquer pacote instalado que nao
-estiver no CRAN será listado como `unavailable`.
+biblioteca particular, que são todas as dependências do `devtools`, além
+dos quatro que já estavam instaladpos. Também há um pacote listado na
+coluna `unavailable`. Este pacote "indisponível" é o pacote `meupacote`
+instalado do GitHub. O pacote estar listado como `unavailable` não
+significa que ele não está disponível para uso. Apenas significa que ele
+não está disponível no CRAN. Dessa forma, ele não terá atualizações
+automáticas por exemplo, com `update.packages()`. Na prática, qualquer
+pacote instalado que nao estiver no CRAN será listado como `unavailable`.
 
 
 # Bibliografia recomendada
