@@ -1,6 +1,9 @@
 # Gerenciamento de pacotes no R
 
-# Introdução {#Sec:intro}
+# Introdução
+
+
+
 
 Atualmente existem milhares de pacotes (*packages*) extras disponíveis
 para os mais variados fins, ajudando a completar ainda mais o R. Todos os
@@ -32,7 +35,7 @@ para que o sistema esteja sempre organizado e atualizado. Este documento
 contém algumas explicações que tem como objetivo ajudar os usuários a
 instalar e gerenciar pacotes.
 
-# Instalando pacotes {#Sec:inst}
+# Instalando pacotes
 
 A maneira mais simples de instalar um pacote do CRAN no R é através da
 função `install.packages()`. Por exemplo, se queremos instalar o pacote
@@ -84,7 +87,7 @@ reinstalado sem preocupações com isso, pois todos os pacotes instaldos
 pelo usuário continuarão em sua biblioteca particular, o que é uma
 grande vantagem quando muitos pacotes são utilizados.
 
-## Criando uma biblioteca particular {#subSec:bib}
+## Criando uma biblioteca particular
 
 Para criar sua biblioteca particular, o usuário deve escolher um diretório
 no sistema onde ele tenha permissão de escrita. A maneira mais fácil é
@@ -226,7 +229,7 @@ projeto, um outro arquivo `.Rprofile` pode ser criado apenas dentro do
 diretório deste projeto especificando os pacotes utilizados
 “localmente”.
 
-## Instalando pacotes na biblioteca particular {#subSec:inst.bib}
+## Instalando pacotes na biblioteca particular
 
 Existem duas maneiras de instalar pacotes no R. A primeira é utilizando a
 função `install.packages()` de dentro do programa, como mencionado no
@@ -235,15 +238,17 @@ no próprio *shell* (linha de comando). Esta segunda opção funciona
 apenas quando o usuário já possui o arquivo fonte do pacote e quer
 apenas instalá-lo.
 
-### Utilizando a função `install.packages()` {#subsubSec:inst.pack}
+### Utilizando a função `install.packages()`
 
 Através desta função, inicialmente é feito o *download* do pacote
-especificado e depois ele é instalado automaticamente. Portanto, para
-instalar o pacote `foo`, podemos fazer
+especificado e depois ele é instalado automaticamente. Vamos usar como
+exemplo a instalação do pacote `mvtnorm`, utilizado para calcular
+medidas das distribuições normal e t multivariadas. Para instalar o
+pacote, podemos fazer
 
 
 ```r
-install.packages("foo", dependencies = TRUE, 
+install.packages("mvtnorm", dependencies = TRUE, 
                  lib = "~/R/library")
 ```
 
@@ -254,23 +259,38 @@ torna o padrão e não precisa ser especificado. Portanto, apenas
 
 
 ```r
-install.packages("foo", dependencies = TRUE)
+install.packages("mvtnorm", dependencies = TRUE)
 ```
 
-irá baixar o pacote `foo` do repositório já especificado anteriormente e
+```
+## Installing package into '/home/fpmayer/R/library'
+## (as 'lib' is unspecified)
+```
+
+irá baixar o pacote `mvtnorm` do repositório já especificado anteriormente e
 instalá-lo na biblioteca `~/R/library`.
 
 Para instalar mais de um pacote ao mesmo tempo na mesma biblioteca, a
 função `c()` pode ser utilizada para especificar uma sequência de
-pacotes. Por exemplo, para instalar os pacotes `foo`, `bar` e `baz`
+pacotes. Por exemplo, para instalar os pacotes `nnet` e `tweedie`
 podemos fazer
 
 
 ```r
-install.packages(c("foo", "bar", "baz"), dependencies = TRUE)
+install.packages(c("nnet", "tweedie"), dependencies = TRUE)
 ```
 
-### Utilizando o comando `R CMD INSTALL` {#subsubSec:rcmd}
+```
+## Installing packages into '/home/fpmayer/R/library'
+## (as 'lib' is unspecified)
+```
+
+Note que os pacotes `stabledist` e `statmod` também foram instalados,
+conforme a mensagem acima. Isso ocorreu porque estes dois pacotes são
+dependências do `tweedie`, e como usamos o argumento `dependencies =
+TRUE`, eles foram selecionados e instalados automaticamente.
+
+### Utilizando o comando `R CMD INSTALL`
 
 Quando o usuário já possui o arquivo fonte (com a extensão `.tar.gz`) do
 pacote a ser instalado não é necessário utilizar a função
@@ -301,7 +321,12 @@ nomes separados por um espaço,
 R CMD INSTALL -l ~/R/library foo.tar.gz bar.tar.gz baz.tar.gz
 ```
 
-# Gerenciando pacotes instalados {#Sec:gerenc}
+Instalar pacotes do CRAN através do `R CMD INSTALL` não é muito comum,
+pois a função `install.packages()` faz todo o processo
+automaticamente. O `R CMD INSTALL` é mais utilizado para pacotes
+disponibilizados por outros meios, que não o repositório do CRAN.
+
+# Gerenciando pacotes instalados
 
 Após a instalação de diversos pacotes diferentes, em algum momento o
 usuário sentirá a necessidade de gerenciá-los. Esse gerenciamento
@@ -326,13 +351,13 @@ packageStatus()
 ## Number of installed packages:
 ##                             
 ##                              ok upgrade unavailable
-##   /home/fpmayer/R/library     0       0           0
+##   /home/fpmayer/R/library     5       0           0
 ##   /usr/local/lib64/R/library 29       0           0
 ## 
 ## Number of available packages (each package counted only once):
 ##                                         
 ##                                          installed not installed
-##   http://cran-r.c3sl.ufpr.br/src/contrib        15          6891
+##   http://cran-r.c3sl.ufpr.br/src/contrib        19          6887
 ```
 
 A primeira parte do resultado desta função
@@ -345,7 +370,14 @@ número de pacotes disponíveis (instalados e não instalados) no
 repositório padrão (definido anteriormente na seção
 [Selecionando um repositório](#selecionando-um-repositório)).
 
-Como demonstrado, este comando pode ser muito útil quando o usuário
+Note que no resultado acima, temos 5 pacotes instalados em
+`~/R/library`, que são os 3 selecionados anteriormente: `mvtnorm`,
+`nnet`, e `tweedie`, e mais as duas dependências do `tweedie`, que foram
+instalados automaticamente: `stabledist` e `statmod`. O importante é
+saber que as dependências, mesmo sendo selecionadas automaticamente,
+também são instaladas na sua biblioteca pessoal.
+
+Como demonstrado acima, este comando pode ser muito útil quando o usuário
 deseja saber quantos pacotes estão na sua biblioteca. No entanto, muitas
 vezes é necessário saber também quais são estes pacotes. Para isso está
 disponível também um método da função `summary()` para a função
@@ -353,8 +385,7 @@ disponível também um método da função `summary()` para a função
 
 
 ```r
-sps <- capture.output(summary(packageStatus()))
-cat(head(sps, 50), "\n", "[[CONTINUA...]]", "\n", sep = "\n")
+summary(packageStatus())
 ```
 
 ```
@@ -363,8 +394,15 @@ cat(head(sps, 50), "\n", "[[CONTINUA...]]", "\n", sep = "\n")
 ## -------------------
 ## 
 ## *** Library /home/fpmayer/R/library
-##          ok     upgrade unavailable 
-##          NA          NA          NA 
+## $ok
+## [1] "mvtnorm"    "nnet"       "stabledist" "statmod"    "tweedie"   
+## 
+## $upgrade
+## NULL
+## 
+## $unavailable
+## NULL
+## 
 ## 
 ## *** Library /usr/local/lib64/R/library
 ## $ok
@@ -391,7 +429,8 @@ cat(head(sps, 50), "\n", "[[CONTINUA...]]", "\n", sep = "\n")
 ## $installed
 ##  [1] "boot"       "class"      "cluster"    "codetools"  "foreign"   
 ##  [6] "KernSmooth" "lattice"    "MASS"       "Matrix"     "mgcv"      
-## [11] "nlme"       "nnet"       "rpart"      "spatial"    "survival"  
+## [11] "mvtnorm"    "nlme"       "nnet"       "rpart"      "spatial"   
+## [16] "stabledist" "statmod"    "survival"   "tweedie"   
 ## 
 ## $`not installed`
 ##    [1] "A3"                          "abbyyR"                     
@@ -400,20 +439,14 @@ cat(head(sps, 50), "\n", "[[CONTINUA...]]", "\n", sep = "\n")
 ##    [7] "ABCoptim"                    "abctools"                   
 ##    [9] "abd"                         "abf2"                       
 ##   [11] "abind"                       "abn"                        
-##   [13] "abundant"                    "acc"                        
-##   [15] "accelerometry"               "AcceptanceSampling"         
-##   [17] "ACCLMA"                      "accrual"                    
-##   [19] "accrued"                     "ACD"                        
-##   [21] "ACDm"                        "acepack"                    
-##   [23] "acid"                        "acm4r"                      
-##   [25] "acmeR"                       "ACNE"                       
-##   [27] "acnr"                        "acopula"                    
 ## 
 ## 
 ## [[CONTINUA...]]
 ```
 
-apresenta um resulatdo mais completo. A primeira parte deste resultado
+apresenta um resulatdo mais completo (note que aqui o resultado foi
+editado para mostrar a parte inicial da saída, uma vez que todos os mais
+de 6000 pacotes do R são listados). A primeira parte deste resultado
 (`Installed packages`) apresenta agora não só o número, mas também quais
 são os pacotes instalados nas bibliotecas disponíveis. Além disso, elas
 também estão separadas entre aquelas atualizadas (`ok`), as que podem
@@ -422,14 +455,14 @@ segunda parte do resultado (`Available packages`) agora apresenta quais
 são todos os pacotes instalados pelo repositório padrão, além de todos
 os outros disponíveis (não instalados).
 
-## Atualizando pacotes {#subSec:atual}
+## Atualizando pacotes
 
 Como visto nos resultados do comando `packageStatus()` acima, pode-se
-notar que alguns pacotes, tanto na biblioteca particular quanto na
-biblioteca padrão do R, podem ser atualizados para versões mais recentes.
-Manter os pacotes atualizados é sempre recomendado pelos desenvolvedores
-do R pois *bugs* estão sempre sendo corrigidos e os pacotes sendo
-aprimorados.
+notar quando existem pacotes instalados, tanto na biblioteca particular
+quanto na biblioteca padrão do R, que podem ser atualizados para versões
+mais recentes. Manter os pacotes atualizados é sempre recomendado pelos
+desenvolvedores do R pois *bugs* estão sempre sendo corrigidos e os
+pacotes estão sendo aprimorados.
 
 No caso dos pacotes instalados na biblioteca padrão do R (que fazem parte
 da instalação padrão do programa), inevitavelmente se torna necessário
@@ -451,10 +484,12 @@ visto a seguir
 update.packages()
 ```
 
-O usuário deve responder para cada pacote apresentado se ele deve ser
-atualizado (`y`) ou não (`N`), além de poder cancelar a operação a
-qualquer momento (`c`). Ao final, os pacotes marcados com `y` serão
-baixados dos repositórios e instalados automaticamente.
+Se existirem pacotes a serem atualizados, cada um será apresentado com
+uma pergunta sobre a atualização. O usuário deve responder para cada
+pacote apresentado se ele deve ser atualizado (`y`) ou não (`N`), além
+de poder cancelar a operação a qualquer momento (`c`). Ao final, os
+pacotes marcados com `y` serão baixados dos repositórios e instalados
+automaticamente.
 
 Opcionalmente, se quiser atualizar todos os pacotes sem precisar
 responder a todas as questões, use
@@ -465,7 +500,7 @@ update.packages(ask = FALSE)
 ```
 
 Ao final de um processo onde todos os pacotes são atualizados, a saída
-do comando `packageStatus()` deve ser
+do comando `packageStatus()` deve ser com 0 pacotes para `upgrade`
 
 
 ```r
@@ -476,47 +511,47 @@ packageStatus()
 ## Number of installed packages:
 ##                             
 ##                              ok upgrade unavailable
-##   /home/fpmayer/R/library     0       0           0
+##   /home/fpmayer/R/library     5       0           0
 ##   /usr/local/lib64/R/library 29       0           0
 ## 
 ## Number of available packages (each package counted only once):
 ##                                         
 ##                                          installed not installed
-##   http://cran-r.c3sl.ufpr.br/src/contrib        15          6891
+##   http://cran-r.c3sl.ufpr.br/src/contrib        19          6887
 ```
 
-# Removendo pacotes {#Sec:remove}
+# Removendo pacotes
 
 A remoção de pacotes pode ser feita de forma semelhante àquela utilizada
 para instalar pacotes. Da mesma forma que os comandos
 `install.packages()` e `R CMD INSTALL` servem para instalar pacotes, os
 comandos `remove.packages()` e `R CMD REMOVE` servem para removê-los.
 
-Por exemplo, para remover o pacote `foo`, de dentro de uma sessão do
+Por exemplo, para remover o pacote `nnet`, de dentro de uma sessão do
 podemos fazer
 
 
 ```r
-remove.packages("foo")
+remove.packages("nnet")
 ```
 
 Alternativamente, o argumento `lib` pode ser utilizado para especificar
 a biblioteca onde o pacote está instalado (ver a sessão
-[subsubSec:inst.pack]). Neste caso, como não estamos especificando,
-assumimos que o pacote está na biblioteca padrão (a primeira do comando
-`.libPaths()`), ou seja, `~/R_environment/my_library`. Note que se o
-pacote em questão estiver em uma biblioteca que não seja essa (*e.g.*
-`R_HOME/library`) será necessário o acesso como root. Para remover mais
-de um pacote utilize a função `c()`, da mesma forma que em
-`install.packages()`.
+[Utilizando a função `install.packages()`](#utilizando-a-função-installpackages)). Neste
+caso, como não estamos especificando, assumimos que o pacote está na
+biblioteca padrão (a primeira do comando `.libPaths()`), ou seja,
+`~/R/library`. Note que se o pacote em questão estiver em uma biblioteca
+que não seja essa (*e.g.* `R_HOME/library`) será necessário o acesso
+como root. Para remover mais de um pacote utilize a função `c()`, da
+mesma forma que em `install.packages()`.
 
 Pacotes também podem ser removidos com o comando `R CMD REMOVE` de um
-*shell* do Linux. Para remover o pacote `foo` da biblioteca particular
+*shell* do Linux. Para remover o pacote `nnet` da biblioteca particular
 criada anteriormente, faça
 
 
 ```sh
-R CMD REMOVE -l ~/R_environment/my_library foo
+R CMD REMOVE -l ~/R/library foo
 ```
 
 Note que neste caso é necessário especificar o argumento `-l` com o
@@ -524,7 +559,7 @@ caminho para a biblioteca. Se esta não for sua biblioteca particular,
 será necessário executar esse comando como root. Para desinstalar mais
 de um pacote especifique o nome dos mesmos separados por um espaço.
 
-# Bibliografia recomendada {#Sec:bib}
+# Bibliografia recomendada
 
 A principal fonte de informação para esse assunto é o capítulo 6 do
 manual **R Installation and Administration**, disponível em
@@ -532,17 +567,12 @@ manual **R Installation and Administration**, disponível em
 
 No entanto, existem alguns artigos publicados no periódico **R news**
 que tratam este assunto de forma um pouco mais abrangente (nos quais
-este documento foi baseado):\
-\
-Ligges, U. 2003. R Help Desk: Package Management. **R news**. Vol. 3/3.
-Disponível em: [http://cran.r-project.org/doc/Rnews/Rnews_2003-3.pdf]().\
-\
-Ripley, B. D. 2005. Packages and their Management in R 2.1.0. **R
-news**. Vol. 5/1. Disponível em:
-[http://cran.r-project.org/doc/Rnews/Rnews_2005-1.pdf]().
+este documento foi baseado):
 
-# Teste de equações
+* Ligges, U. 2003. R Help Desk: Package Management. **R
+  news**. Vol. 3/3. Disponível em:
+  [http://cran.r-project.org/doc/Rnews/Rnews_2003-3.pdf]().
+* Ripley, B. D. 2005. Packages and their Management in R 2.1.0. **R
+  news**. Vol. 5/1. Disponível em:
+  [http://cran.r-project.org/doc/Rnews/Rnews_2005-1.pdf]().
 
-$$
-f(x) = \theta e^{-x\theta}
-$$
