@@ -283,6 +283,7 @@ install.packages(c("nnet", "tweedie"), dependencies = TRUE)
 ```
 ## Installing packages into '/home/fpmayer/R/library'
 ## (as 'lib' is unspecified)
+## also installing the dependencies 'stabledist', 'statmod'
 ```
 
 Note que os pacotes `stabledist` e `statmod` também foram instalados,
@@ -326,6 +327,7 @@ pois a função `install.packages()` faz todo o processo
 automaticamente. O `R CMD INSTALL` é mais utilizado para pacotes
 disponibilizados por outros meios, que não o repositório do CRAN.
 
+
 # Gerenciando pacotes instalados
 
 Após a instalação de diversos pacotes diferentes, em algum momento o
@@ -357,7 +359,7 @@ packageStatus()
 ## Number of available packages (each package counted only once):
 ##                                         
 ##                                          installed not installed
-##   http://cran-r.c3sl.ufpr.br/src/contrib        19          6887
+##   http://cran-r.c3sl.ufpr.br/src/contrib        19          6892
 ```
 
 A primeira parte do resultado desta função
@@ -517,7 +519,7 @@ packageStatus()
 ## Number of available packages (each package counted only once):
 ##                                         
 ##                                          installed not installed
-##   http://cran-r.c3sl.ufpr.br/src/contrib        19          6887
+##   http://cran-r.c3sl.ufpr.br/src/contrib        19          6892
 ```
 
 # Removendo pacotes
@@ -532,7 +534,12 @@ podemos fazer
 
 
 ```r
-remove.packages("nnet")
+remove.packages("tweedie")
+```
+
+```
+## Removing package from '/home/fpmayer/R/library'
+## (as 'lib' is unspecified)
 ```
 
 Alternativamente, o argumento `lib` pode ser utilizado para especificar
@@ -551,13 +558,156 @@ criada anteriormente, faça
 
 
 ```sh
-R CMD REMOVE -l ~/R/library foo
+R CMD REMOVE -l ~/R/library tweedie
 ```
 
 Note que neste caso é necessário especificar o argumento `-l` com o
 caminho para a biblioteca. Se esta não for sua biblioteca particular,
 será necessário executar esse comando como root. Para desinstalar mais
 de um pacote especifique o nome dos mesmos separados por um espaço.
+
+Com a remoção do pacote `tweedie`, o resultado de `packageStatus()` deve
+agora contar com apenas 4 pacotes instalados na biblioteca particular
+
+
+```r
+packageStatus()
+```
+
+```
+## Number of installed packages:
+##                             
+##                              ok upgrade unavailable
+##   /home/fpmayer/R/library     4       0           0
+##   /usr/local/lib64/R/library 29       0           0
+## 
+## Number of available packages (each package counted only once):
+##                                         
+##                                          installed not installed
+##   http://cran-r.c3sl.ufpr.br/src/contrib        18          6893
+```
+
+Note que as dependências do pacote `tweedie` que foram instaladas
+automaticamente (`stabledist` e `statmod`) continuam instalados, ou
+seja, eles não são removidos automaticamente. A remoção destes pacotes
+deve ser feita manualmente (se necessário), pois não há uma forma
+automática de remover as dependências de pacotes que foram instaladas
+automaticamente.
+
+## Instalando pacotes de fora do CRAN
+
+Atualmente muitos programadores desenvolvem e disponibilizam seus
+pacotes em sites que não são o CRAN. Alguns autores disponibilizam seus
+pacotes em sites próprios, e dessa forma, basta baixar o pacote
+(geralmente o código-fonte com extensão `.tar.gz`), e instalar
+localmente, utilizando o comando `R CMD INSTALL`
+(ref. [Utilizando o comando `R CMD INSTALL`](#utilizando-o-comando-r-cmd-install)),
+ou o `install.packages()` com
+
+
+```r
+install.packages("foo.tar.gz", repos = NULL)
+```
+
+Onde o argumento `repos = NULL` especifica que o arquivo do pacote,
+`foo.tar.gz` está no diretório local, e não no repositório do CRAN.
+
+Um outro exemplo de pacotes fora do CRAN são aqueles desenvolvidos e
+disponibilizados por sites como [GitHub](www.github.com), e
+[BitBucket](www.bitbucket.com). Atualmente 
+há um grande número de desenvolvedores que preferem manter seus pacotes
+nestes sites devido à grande facilidade de colaboração e gerenciamento
+dos pacotes. Além disso, ocorre também que muitos desenvolvedores
+possuem uma versão estável do pacote no CRAN, mas recomendam utilizar
+versões em desenvolvimento disponibilizadas mais rapidamente no GitHub
+por exemplo.
+
+De qualquer maneira, podemos instalar um pacote diretamente de seu
+repositório de algum destes sites. O pacote `devtools` possui funções
+para baixar e instalar automaticamente pacotes desemvolvidos nestes
+sites. Antes de qualquer coisa, é necessário então instalar o pacote
+`devtools` do CRAN
+
+
+```r
+install.packages("devtools")
+```
+
+```
+## Installing package into '/home/fpmayer/R/library'
+## (as 'lib' is unspecified)
+## also installing the dependencies 'stringi', 'magrittr', 'BH', 'mime', 'curl', 'R6', 'stringr', 'bitops', 'brew', 'Rcpp', 'xml2', 'httr', 'RCurl', 'memoise', 'whisker', 'evaluate', 'digest', 'rstudioapi', 'jsonlite', 'roxygen2', 'rversions', 'git2r'
+```
+
+```
+## 
+## The downloaded source packages are in
+## 	'/tmp/RtmpPJxvtS/downloaded_packages'
+```
+
+Após a instalação, podemos usar as funções `install_github()` e
+`install_bitbucket()` para instalar pacotes diretamente do GitHub, e do
+BitBucket, respectivamente. Como exemplo, vamos instalar o pacote de
+exemplo criado neste mesmo repositório (`meupacote`). Na função
+`install_github()`, precisamos especificar apenas o nome do usuário, o
+nome do repositório, e (opcionalmente) o nome do sub-diretório onde se
+encontra o pacote. Nesse caso o pacote se encontra em
+hhtp://github.com/fernandomayer/R-pacotes-rautu/meupacote, portanto
+podemos instalá-lo com
+
+
+```r
+library(devtools)
+install_github("fernandomayer/R-pacotes-rautu", subdir = "meupacote")
+```
+
+```
+## Downloading github repo fernandomayer/R-pacotes-rautu@master
+## Installing meupacote
+## '/usr/local/lib64/R/bin/R' --no-site-file --no-environ --no-save  \
+##   --no-restore CMD INSTALL  \
+##   '/tmp/RtmpPJxvtS/devtools25c626b720f5/fernandomayer-R-pacotes-rautu-9680672/meupacote'  \
+##   --library='/home/fpmayer/R/library' --install-tests
+```
+
+Note que o pacote `meupacote` foi instalado também na biblioteca pessoal
+(que é o padrão), e agora pode ser utilizado normalmente com a chamada
+de
+
+
+```r
+library(meupacote)
+```
+
+O resultado da chamada de `packageStatus()` agora é
+
+
+```r
+packageStatus()
+```
+
+```
+## Number of installed packages:
+##                             
+##                              ok upgrade unavailable
+##   /home/fpmayer/R/library    27       0           1
+##   /usr/local/lib64/R/library 29       0           0
+## 
+## Number of available packages (each package counted only once):
+##                                         
+##                                          installed not installed
+##   http://cran-r.c3sl.ufpr.br/src/contrib        41          6870
+```
+
+Veja que agora temos um grande número de pacotes instalados na
+biblioteca particular, e um pacote listado na coluna `unavailable`. Este
+pacote "indisponível" é o pacote `meupacote` instalado do GitHub. O
+pacote estar listado como `unavailable` não significa que ele não está
+disponível para uso. Apenas significa que ele não está disponível no
+CRAN. Dessa forma, ele não terá atualizações automáticas por exemplo,
+com `update.packages()`. Na prática, qualquer pacote instalado que nao
+estiver no CRAN será listado como `unavailable`.
+
 
 # Bibliografia recomendada
 
