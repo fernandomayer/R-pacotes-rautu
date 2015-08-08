@@ -852,6 +852,12 @@ R podem ser encontradas em
 [http://docs.travis-ci.com/user/languages/r](). E detalhes gerais estão
 disponíveis em [http://docs.travis-ci.com/user/getting-started]().
 
+*****
+
+Repositório original:
+http://git.leg.ufpr.br/fernandomayer/R-pacotes-rautu
+
+Repositório espelho: https://github.com/fernandomayer/R-pacotes-rautu
 
 
 [1]: #motivação
