@@ -2,17 +2,17 @@
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 
-- [Introdução](#introduo)
+- [Introdução](#introdução)
 - [Instalando pacotes](#instalando-pacotes)
     - [Criando uma biblioteca particular](#criando-uma-biblioteca-particular)
-    - [Selecionando um repositório](#selecionando-um-repositrio)
+    - [Selecionando um repositório](#selecionando-um-repositório)
     - [Instalando pacotes na biblioteca particular](#instalando-pacotes-na-biblioteca-particular)
-        - [Utilizando a função `install.packages()`](#utilizando-a-funo-installpackages)
+        - [Utilizando a função `install.packages()`](#utilizando-a-função-installpackages)
         - [Utilizando o comando `R CMD INSTALL`](#utilizando-o-comando-r-cmd-install)
 - [Gerenciando pacotes instalados](#gerenciando-pacotes-instalados)
     - [Atualizando pacotes](#atualizando-pacotes)
 - [Removendo pacotes](#removendo-pacotes)
-    - [Instalando pacotes de fora do CRAN](#instalando-pacotes-de-fora-do-cran)
+- [Instalando pacotes de fora do CRAN](#instalando-pacotes-de-fora-do-cran)
 - [Bibliografia recomendada](#bibliografia-recomendada)
 
 <!-- markdown-toc end -->
@@ -475,7 +475,7 @@ deve ser feita manualmente (se necessário), pois não há uma forma
 automática de remover as dependências de pacotes que foram instaladas
 automaticamente.
 
-## Instalando pacotes de fora do CRAN
+# Instalando pacotes de fora do CRAN
 
 Atualmente muitos programadores desenvolvem e disponibilizam seus
 pacotes em sites que não são o CRAN. Alguns autores disponibilizam seus
