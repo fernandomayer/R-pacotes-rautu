@@ -1,5 +1,23 @@
 # Gerenciamento de pacotes no R
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+
+- [Introdução](#introduo)
+- [Instalando pacotes](#instalando-pacotes)
+    - [Criando uma biblioteca particular](#criando-uma-biblioteca-particular)
+    - [Selecionando um repositório](#selecionando-um-repositrio)
+    - [Instalando pacotes na biblioteca particular](#instalando-pacotes-na-biblioteca-particular)
+        - [Utilizando a função `install.packages()`](#utilizando-a-funo-installpackages)
+        - [Utilizando o comando `R CMD INSTALL`](#utilizando-o-comando-r-cmd-install)
+- [Gerenciando pacotes instalados](#gerenciando-pacotes-instalados)
+    - [Atualizando pacotes](#atualizando-pacotes)
+- [Removendo pacotes](#removendo-pacotes)
+    - [Instalando pacotes de fora do CRAN](#instalando-pacotes-de-fora-do-cran)
+- [Bibliografia recomendada](#bibliografia-recomendada)
+
+<!-- markdown-toc end -->
+
+
 # Introdução
 
 
@@ -359,7 +377,7 @@ packageStatus()
 ## Number of available packages (each package counted only once):
 ##                                         
 ##                                          installed not installed
-##   http://cran-r.c3sl.ufpr.br/src/contrib        19          6892
+##   http://cran-r.c3sl.ufpr.br/src/contrib        19          7057
 ```
 
 A primeira parte do resultado desta função
@@ -438,9 +456,9 @@ summary(packageStatus())
 ##    [1] "A3"                          "abbyyR"                     
 ##    [3] "abc"                         "abc.data"                   
 ##    [5] "ABCanalysis"                 "abcdeFBA"                   
-##    [7] "ABCoptim"                    "abctools"                   
-##    [9] "abd"                         "abf2"                       
-##   [11] "abind"                       "abn"                        
+##    [7] "ABCoptim"                    "abcrf"                      
+##    [9] "abctools"                    "abd"                        
+##   [11] "abf2"                        "abind"                      
 ## 
 ## 
 ## [[CONTINUA...]]
@@ -519,7 +537,7 @@ packageStatus()
 ## Number of available packages (each package counted only once):
 ##                                         
 ##                                          installed not installed
-##   http://cran-r.c3sl.ufpr.br/src/contrib        19          6892
+##   http://cran-r.c3sl.ufpr.br/src/contrib        19          7057
 ```
 
 # Removendo pacotes
@@ -584,7 +602,7 @@ packageStatus()
 ## Number of available packages (each package counted only once):
 ##                                         
 ##                                          installed not installed
-##   http://cran-r.c3sl.ufpr.br/src/contrib        18          6893
+##   http://cran-r.c3sl.ufpr.br/src/contrib        18          7058
 ```
 
 Note que as dependências do pacote `tweedie` que foram instaladas
@@ -642,7 +660,7 @@ install.packages("devtools")
 ```
 ## 
 ## The downloaded source packages are in
-## 	'/tmp/RtmpPJxvtS/downloaded_packages'
+## 	'/tmp/RtmpxtZV6R/downloaded_packages'
 ```
 
 Após a instalação, podemos usar as funções `install_github()` e
@@ -666,7 +684,7 @@ install_github("fernandomayer/R-pacotes-rautu", subdir = "meupacote")
 ## Installing meupacote
 ## '/usr/local/lib64/R/bin/R' --no-site-file --no-environ --no-save  \
 ##   --no-restore CMD INSTALL  \
-##   '/tmp/RtmpPJxvtS/devtools25c626b720f5/fernandomayer-R-pacotes-rautu-9680672/meupacote'  \
+##   '/tmp/RtmpxtZV6R/devtools4c514c27943/fernandomayer-R-pacotes-rautu-9b372e9/meupacote'  \
 ##   --library='/home/fpmayer/R/library' --install-tests
 ```
 
@@ -696,7 +714,7 @@ packageStatus()
 ## Number of available packages (each package counted only once):
 ##                                         
 ##                                          installed not installed
-##   http://cran-r.c3sl.ufpr.br/src/contrib        41          6870
+##   http://cran-r.c3sl.ufpr.br/src/contrib        41          7035
 ```
 
 Veja que agora temos um grande número de pacotes instalados na
